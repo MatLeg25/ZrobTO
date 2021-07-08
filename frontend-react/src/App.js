@@ -2,6 +2,7 @@ import './App.css';
 import React, {Component, useState} from 'react';  
 import OfferManager from './OfferManager/OfferManager';
 import Navbar1 from './Navbar1';
+import LandingPage from "./LandingPage";
 
 
 
@@ -17,11 +18,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div> 
-        <Navbar1 />
-        <hr />
-      <OfferManager />
-        <hr />
+      <div>
+        <LandingPage />
       </div>
     );
   }
