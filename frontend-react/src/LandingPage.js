@@ -1,8 +1,21 @@
 //import './App.css';
 import React, {Component, useState} from 'react';
-import {Button, Modal, Navbar} from 'react-bootstrap'
+import {Container} from "react-bootstrap";
+import { Paper } from '@material-ui/core';
+import Image from "./resources/background.jpg"
+
 
 import Navbar1 from "./Navbar1";
+
+
+const styles = {
+    paperContainer: {
+        backgroundImage: `url(${Image})`,
+        height: '25em',
+        backgroundPosition: "top right"
+
+    }
+};
 
 class LandingPage extends React.Component {
 
@@ -10,8 +23,10 @@ class LandingPage extends React.Component {
         return (
             <div>
                 <Navbar1/>
-            <div> Landing Page</div>
-
+                <Container height={1000}>
+                    <Paper style={styles.paperContainer}>
+                    </Paper>
+                </Container>
             </div>
         )
     }
