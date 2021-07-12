@@ -12,7 +12,7 @@ class LandingPage extends React.Component {
                 <NavbarZT />
             <div> Landing Page</div>
 
-            <FormControl component="fieldset">
+            {/* <FormControl component="fieldset">
                     <FormLabel component="legend">Label Placement</FormLabel>
                     <FormGroup aria-label="position" row>
                         <FormControlLabel
@@ -40,7 +40,7 @@ class LandingPage extends React.Component {
                             labelPlacement="end"
                         />
                     </FormGroup>
-                </FormControl>
+                </FormControl> */}
 
 
             </div>

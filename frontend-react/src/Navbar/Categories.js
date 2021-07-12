@@ -1,12 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Box from '@material-ui/core/Box';
@@ -15,44 +8,57 @@ class Categories extends React.Component {
     constructor() {
         super();
         this.state = {
-          categoriesName : ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"],
-            subCategories : ["cat1","cat2","cat3","cat4","cat5"],
+            categoriesName : ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"],
+            subCategories : [             
+                ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+                ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
+                ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
+                []
+            ],
+            subCategories1 : {}
         }
 
     }
-    
 
-displayCategories() {
+//works on nested list TODO: rethink works with dictionary (key: list of subcategoriees)
+    // componentDidMount() {
+    //     const getSubCategories1 = {                
+    //         cat1 : ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+    //         cat2 : ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
+    //         cat3 : ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
+    //         cat4 : []
+    //     }
+    //     this.setState({subCategories1 : getSubCategories1});
+    // }
 
-    const subCategory = this.state.subCategories.map((subCategory, index) =>
-    <Nav.Link href={"#category"+index}>{subCategory}</Nav.Link>
-    )
 
+    getSubCategories(index) {
+        
+        let SubCatList = []
+
+        for (let subCat of this.state.subCategories[index]) {
+            SubCatList.push(
+                            <Nav.Link href={"#category-"+index+"sc="+SubCatList.length}>{subCat}</Nav.Link>
+            )
+        }
+
+        return  SubCatList;
+    }
+
+
+    displayCategories() {
     const categoryName = this.state.categoriesName.map((category, index) =>
-        <Tab eventKey={"home"+index} title={category}>
-            {/* <Nav className="me-auto"> */}
-          {subCategory}
-          {/* </Nav> */}
+        <Tab eventKey={"category-"+index} title={category}>
+            <Nav className="flex-sm-column">
+                {this.getSubCategories(index)}
+            </Nav>
         </Tab>
     );
 
-
     return (
-    //   <DropdownButton id="dropdown-basic-button" title="Kategorie"> </DropdownButton>
-    <>
-
-    <Tabs defaultActiveKey="home2" id="uncontrolled-tab-example" className="mb-3">
-        {categoryName}
-    </Tabs>
-
-
-
-
-        
-
-
-
-    </>
+            <Tabs defaultActiveKey="category-1" id="uncontrolled-tab-example" className="mb-3">
+                {categoryName}
+            </Tabs>
       )
     }
 
