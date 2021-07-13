@@ -38,7 +38,7 @@ class Categories extends React.Component {
 
         for (let subCat of this.state.subCategories[index]) {
             SubCatList.push(
-                            <Nav.Link href={"#category-"+index+"sc="+SubCatList.length}>{subCat}</Nav.Link>
+                            <Nav.Link href={"#SubCategory-"+index+"/"+SubCatList.length} key={"#SubCategory-"+index+"/"+SubCatList.length}>{subCat}</Nav.Link>
             )
         }
 
@@ -48,15 +48,15 @@ class Categories extends React.Component {
 
     displayCategories() {
     const categoryName = this.state.categoriesName.map((category, index) =>
-        <Tab eventKey={"category-"+index} title={category}>
-            <Nav className="flex-sm-column">
+        <Tab fill variant="tabs" eventKey={"categoryName-"+index} title={category} key={"categoryName-"+index} >
+            <Nav className="flex-sm-column" key={"categoryName-"+index} fill variant="tabs">
                 {this.getSubCategories(index)}
             </Nav>
         </Tab>
     );
 
     return (
-            <Tabs defaultActiveKey="category-1" id="uncontrolled-tab-example" className="mb-3">
+            <Tabs defaultActiveKey="categoryName-1" fill variant="tabs" >
                 {categoryName}
             </Tabs>
       )

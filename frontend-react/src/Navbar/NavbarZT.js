@@ -4,6 +4,9 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Box from '@material-ui/core/Box';
+import Container from 'react-bootstrap/Container'
+
+  //<Box component="div" m={2} p={2} width={1}>  
 
 import Categories from './Categories';
 
@@ -17,18 +20,19 @@ class NavbarZT extends React.Component {
                     </Box>
 
         const categories = (
-                          <NavDropdown title="Kategorie" id="nav-dropdown">
+                          <NavDropdown title="Kategorie" id="nav-dropdown" >
                             <Categories />
                           </NavDropdown>
         )
 
-                                        //m=height  //p=padding
-          return (<Box component="div" m={2} p={2} >  
-            <Navbar bg="light" expand="lg" >
+          return (
+            <Container >
+        
+            <Navbar bg="light" expand="lg" sticky="top">
             {logo}
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" >
-              <Nav className="mr-auto">
+            <Navbar.Collapse className="justify-content-end">
+              <Nav>
                 {categories}
                 <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
                 <Nav.Link href="#link">Zaloguj się</Nav.Link>
@@ -36,7 +40,8 @@ class NavbarZT extends React.Component {
                 </Nav>
             </Navbar.Collapse>
           </Navbar>
-          </Box>
+          
+          </Container>
             )
           }
 
