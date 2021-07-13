@@ -2,7 +2,18 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Box from '@material-ui/core/Box';
+import Container from 'react-bootstrap/Container';
+
+
+const styles = {
+
+    categoryDropdown: {
+        width: '200%',
+        backgroundColor: 'grey',
+        margin: 'auto',
+    },
+
+};
 
 class Categories extends React.Component {
     constructor() {
@@ -10,7 +21,7 @@ class Categories extends React.Component {
         this.state = {
             categoriesName : ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"],
             subCategories : [             
-                ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+               ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
                 ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
                 ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
                 []
@@ -56,9 +67,11 @@ class Categories extends React.Component {
     );
 
     return (
+        <Container style={styles.categoryDropdown}>
             <Tabs defaultActiveKey="categoryName-1" fill variant="tabs" >
                 {categoryName}
             </Tabs>
+            </Container>
       )
     }
 
