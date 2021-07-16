@@ -20,7 +20,7 @@ class NavbarZT extends React.Component {
                     </Box>
 
         const categories = (
-                          <NavDropdown title="Kategorie" id="nav-dropdown" >
+                          <NavDropdown title="Kategorie" id="nav-dropdown">
                             <Categories />
                           </NavDropdown>
         )
@@ -33,7 +33,9 @@ class NavbarZT extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className="justify-content-end">
               <Nav>
-                {categories}
+              {categories}
+                {/* <Categories /> */}
+             
                 <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
                 <Nav.Link href="#link">Zaloguj się</Nav.Link>
                 <Button variant="outline-success" >DOŁĄCZ</Button>
