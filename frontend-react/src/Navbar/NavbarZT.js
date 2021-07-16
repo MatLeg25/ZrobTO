@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container'
   //<Box component="div" m={2} p={2} width={1}>  
 
 import Categories from './Categories';
+import logoImg from '../resources/logoV1.png';
 
 class NavbarZT extends React.Component {
 
@@ -16,7 +17,7 @@ class NavbarZT extends React.Component {
         displayNavbar() {
                                           
         const logo = <Box bgcolor="#c7f7d4" color="red" p={2} >
-                        <Navbar.Brand href="#home">ZróbTO</Navbar.Brand>
+                        <img src={logoImg} width="100" height="50" />
                     </Box>
 
         const categories = (

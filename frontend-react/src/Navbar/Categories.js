@@ -54,36 +54,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-///////////////////////////////////
-
-const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
-const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
-const subCategories = [             
-    ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-    ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-    ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-    []
-];
-
-function CategoryList(props) {
-  const arr = props.data;
-  const listItems = arr.map((val, index) =>
-  <Tab label={val} {...a11yProps({index})} icon={categoriesIcon[index]} key={"category-"+index}/>
-  );
-  return <div key={"category"}>{listItems}</div>;
-  }
-
-  const el = (
-    <div>
-      <CategoryList data={categoriesName} />
-    </div>
-  );
-
-
-
-/////////////////////////////////////
-
-
 
 export default function FullWidthTabs() {
   const classes = useStyles();
@@ -98,61 +68,69 @@ export default function FullWidthTabs() {
     setValue(index);
   };
 
-  ////
-  const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
-  const subCategories = [             
-      ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-      ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-      ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-      []
-  ];
-  ///
+///////////////////////////////////
+//TODO: rethink data format for category: [name<=>icon<=>subcats]
+const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
+const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
+const subCategories = [             
+    ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+    ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
+    ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
+    []
+];
+const subCategories0 = [             
+    ["SubCatTitle1","SubCat1a","SubCat1b","SubCat1c"],
+    ["SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d"],
+    ["SubCatTitle3","SubCat3a","SubCat3b","SubCat3c"],
+    [],
+];
+const alle = [subCategories0, subCategories,subCategories0, subCategories0]
 
-  const listItems = categoriesName.map((val, index) =>
-  <Tab label={val} {...a11yProps({index})} icon={categoriesIcon[index]} key={"category-"+index}/>
+const categoryNameTAB = categoriesName.map((name, index) =>
+  <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
     );
 
 
-
-
-function getSubCat(SCindex) {
-  let f2 = [];  
-  {subCategories[SCindex].map((val, index) =>
+function getSubCategory(categoryIndex,subCatIndex) {
+  let elem = [];  
+  {alle[categoryIndex][subCatIndex].map((name, index) =>
           {if(index===0) {
-            f2.push(<b>{val}</b>)} 
-            else {f2.push(<p>{val}</p>)}
+            elem.push(<><b>{name}</b><hr /></>)} 
+            else {elem.push(<p>{name}</p>)}
           }
         )}
-  return <Grid item xs={4}>{f2}</Grid>
+  return <Grid item xs={4} >{elem}</Grid>
 }
 
-function getAllSubCategories() {
-  const el =[];
+function getAllSubCategories(categoryIndex) {
+  const elems =[];
   for(let subCatIndex in subCategories) {
-      el.push(getSubCat(subCatIndex))
+    elems.push(getSubCategory(categoryIndex,subCatIndex))
   }
-  return el;
+  return elems;
 }
 
 
-function getCategories() {
-  const el =[];
+function getCategoriesTABPanel() {
+  const elems =[];
   for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
-      el.push(
+        elems.push(
         <TabPanel value={value} index={CatIndex} dir={theme.direction}>
-          <Grid container spacing={6} direction="column">
+          <Grid container spacing={6} direction="column" alignItems='center' justifyContent='flex-end'>
 
-            <Grid item xs={12} container>
-                  {getAllSubCategories()}
+            <Grid item xs={12} container spacing={3} alignItems='stretch' justifyContent='center' minHeight="100vh">
+                  {getAllSubCategories(value)}
             </Grid>
 
           </Grid>
         </TabPanel>
       )
   }
-  return el;
+  return elems;
 
 }
+
+  /////////////////////////////////////
 
   return (
     <div className={classes.root}>
@@ -166,12 +144,12 @@ function getCategories() {
           aria-label="full width tabs example"
         >
 
-        {listItems}
+        {categoryNameTAB}
         
         </Tabs>
       </AppBar>
 
-      {getCategories()}
+      {getCategoriesTABPanel()}
 
  
     </div>
