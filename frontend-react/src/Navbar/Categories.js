@@ -7,11 +7,13 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import {Link} from 'react-router-dom';
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
 import DvrIcon from '@material-ui/icons/Dvr';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+
 
 
 function TabPanel(props) {
@@ -95,7 +97,7 @@ function getSubCategory(categoryIndex,subCatIndex) {
   let elem = [];  
   {alle[categoryIndex][subCatIndex].map((name, index) =>
           {if(index===0) {
-            elem.push(<><b>{name}</b><hr /></>)} 
+            elem.push(<Link to={'/subCat/12'}><b>{name}</b><hr /></Link>)} 
             else {elem.push(<p>{name}</p>)}
           }
         )}
