@@ -1,6 +1,7 @@
 import './App.css';
 import React, {} from 'react';  
 import LandingPage from "./LandingPage";
+import Offers from "./components/pages/Offers"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
 //Routing
@@ -30,7 +31,10 @@ const App = () => (
           <Route path='/subCat/:subCatID'> <SubCategoryPage /></Route> 
           <Route path='/offerManager'><OfferManager /></Route>
           <Route path="/*"><NotFound /></Route>
+          <Route path="/offers"><Offers/></Route>
+
           </Switch>
+
         </ThemeProvider>
     
   </Router>
