@@ -1,6 +1,7 @@
 import './App.css';
 import React, {} from 'react';  
 import LandingPage from "./LandingPage";
+import Offers from "./components/pages/Offers"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
 const theme = createTheme({
@@ -28,7 +29,7 @@ class App extends React.Component {
     return (
         <ThemeProvider theme={theme}>
       <div>
-        <LandingPage />
+        <Offers/>
       </div>
         </ThemeProvider>
     );
