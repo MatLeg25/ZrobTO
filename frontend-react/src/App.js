@@ -4,6 +4,13 @@ import LandingPage from "./LandingPage";
 import Offers from "./components/pages/Offers"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
+//Routing
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import SubCategoryPage from './SubCategoryPage';
+import NotFound from './NotFound';
+import OfferManager from './OfferManager/OfferManager'
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -15,26 +22,24 @@ const theme = createTheme({
 })
 
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state={
-    }
-
-  }
-
-
-
-  render() {
-    return (
+const App = () => (
+  <Router>
+    
         <ThemeProvider theme={theme}>
-      <div>
-        <Offers/>
-      </div>
+        <Switch>
+          <Route path='/home'><LandingPage /></Route> 
+          <Route path='/subCat/:subCatID'> <SubCategoryPage /></Route> 
+          <Route path='/offerManager'><OfferManager /></Route>
+          <Route path="/*"><NotFound /></Route>
+          <Route path="/offers"><Offers/></Route>
+
+          </Switch>
+
         </ThemeProvider>
+    
+  </Router>
     );
-  }
-}
+
 
 
 export default App;

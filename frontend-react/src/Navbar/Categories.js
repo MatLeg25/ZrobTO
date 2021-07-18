@@ -1,86 +1,159 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav'
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import Container from 'react-bootstrap/Container';
+import PropTypes from 'prop-types';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import {Link} from 'react-router-dom';
+
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import EditIcon from '@material-ui/icons/Edit';
+import DvrIcon from '@material-ui/icons/Dvr';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
-const styles = {
 
-    categoryDropdown: {
-        width: '200%',
-        backgroundColor: 'grey',
-        margin: 'auto',
-    },
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
-class Categories extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            categoriesName : ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"],
-            subCategories : [             
-               ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-                ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-                ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-                []
-            ],
-            subCategories1 : {}
-        }
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
 
-    }
-
-//works on nested list TODO: rethink works with dictionary (key: list of subcategoriees)
-    // componentDidMount() {
-    //     const getSubCategories1 = {                
-    //         cat1 : ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-    //         cat2 : ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-    //         cat3 : ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-    //         cat4 : []
-    //     }
-    //     this.setState({subCategories1 : getSubCategories1});
-    // }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
 
-    getSubCategories(index) {
-        
-        let SubCatList = []
 
-        for (let subCat of this.state.subCategories[index]) {
-            SubCatList.push(
-                            <Nav.Link href={"#SubCategory-"+index+"/"+SubCatList.length} key={"#SubCategory-"+index+"/"+SubCatList.length}>{subCat}</Nav.Link>
-            )
-        }
+export default function FullWidthTabs() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
 
-        return  SubCatList;
-    }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
 
-    displayCategories() {
-    const categoryName = this.state.categoriesName.map((category, index) =>
-        <Tab fill variant="tabs" eventKey={"categoryName-"+index} title={category} key={"categoryName-"+index} >
-            <Nav className="flex-sm-column" key={"categoryName-"+index} fill variant="tabs">
-                {this.getSubCategories(index)}
-            </Nav>
-        </Tab>
+///////////////////////////////////
+//TODO: rethink data format for category: [name<=>icon<=>subcats]
+const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
+const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
+const subCategories = [             
+    ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+    ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
+    ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
+    []
+];
+const subCategories0 = [             
+    ["SubCatTitle1","SubCat1a","SubCat1b","SubCat1c"],
+    ["SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d"],
+    ["SubCatTitle3","SubCat3a","SubCat3b","SubCat3c"],
+    [],
+];
+const alle = [subCategories0, subCategories,subCategories0, subCategories0]
+
+const categoryNameTAB = categoriesName.map((name, index) =>
+  <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
     );
 
-    return (
-        <Container style={styles.categoryDropdown}>
-            <Tabs defaultActiveKey="categoryName-1" fill variant="tabs" >
-                {categoryName}
-            </Tabs>
-            </Container>
-      )
-    }
 
+function getSubCategory(categoryIndex,subCatIndex) {
+  let elem = [];  
+  {alle[categoryIndex][subCatIndex].map((name, index) =>
+          {if(index===0) {
+            elem.push(<Link to={'/subCat/12'}><b>{name}</b><hr /></Link>)} 
+            else {elem.push(<p>{name}</p>)}
+          }
+        )}
+  return <Grid item xs={4} >{elem}</Grid>
+}
 
-    render() {
-        return this.displayCategories();
-    }
-
+function getAllSubCategories(categoryIndex) {
+  const elems =[];
+  for(let subCatIndex in subCategories) {
+    elems.push(getSubCategory(categoryIndex,subCatIndex))
+  }
+  return elems;
 }
 
 
-export default Categories;
+function getCategoriesTABPanel() {
+  const elems =[];
+  for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
+        elems.push(
+        <TabPanel value={value} index={CatIndex} dir={theme.direction}>
+          <Grid container spacing={6} direction="column" alignItems='center' justifyContent='flex-end'>
+
+            <Grid item xs={12} container spacing={3} alignItems='stretch' justifyContent='center' minHeight="100vh">
+                  {getAllSubCategories(value)}
+            </Grid>
+
+          </Grid>
+        </TabPanel>
+      )
+  }
+  return elems;
+
+}
+
+  /////////////////////////////////////
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant= "fullWidth" //"scrollable"
+          aria-label="full width tabs example"
+        >
+
+        {categoryNameTAB}
+        
+        </Tabs>
+      </AppBar>
+
+      {getCategoriesTABPanel()}
+
+ 
+    </div>
+  );
+}
