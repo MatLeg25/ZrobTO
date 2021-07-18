@@ -30,9 +30,9 @@ const App = () => (
           <Route path='/home'><LandingPage /></Route> 
           <Route path='/subCat/:subCatID'> <SubCategoryPage /></Route> 
           <Route path='/offerManager'><OfferManager /></Route>
-          <Route path="/*"><NotFound /></Route>
           <Route path="/offers"><Offers/></Route>
-
+          <Route path="/*"><NotFound /></Route>
+        
           </Switch>
 
         </ThemeProvider>
