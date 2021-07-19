@@ -86,7 +86,8 @@ const subCategories0 = [
     ["SubCatTitle3","SubCat3a","SubCat3b","SubCat3c"],
     [],
 ];
-const alle = [subCategories0, subCategories,subCategories0, subCategories0]
+
+const allSubCats = [subCategories0, subCategories,subCategories0, subCategories0]
 
 const categoryNameTAB = categoriesName.map((name, index) =>
   <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
@@ -95,10 +96,14 @@ const categoryNameTAB = categoriesName.map((name, index) =>
 
 function getSubCategory(categoryIndex,subCatIndex) {
   let elem = [];  
-  {alle[categoryIndex][subCatIndex].map((name, index) =>
+  {allSubCats[categoryIndex][subCatIndex].map((name, index) =>
           {if(index===0) {
-            elem.push(<Link to={'/subCat/12'}><b>{name}</b><hr /></Link>)} 
-            else {elem.push(<p>{name}</p>)}
+            //'/category/:catID/subCategory/:subCatNameID/:subCatID?'  
+            elem.push(<Link to={'category/'+categoryIndex+'/subCategory/'+subCatIndex} style={{color: "#00e676"}}><b>{name}</b><hr /></Link>)} 
+            else {
+              elem.push(
+                <Link to={'category/'+categoryIndex+'/subCategory/'+subCatIndex+'/'+index} style={{color: "teal"}}>{name}<hr /></Link>
+              )}
           }
         )}
   return <Grid item xs={4} >{elem}</Grid>

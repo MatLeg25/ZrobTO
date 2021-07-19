@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Box from '@material-ui/core/Box';
 import Container from 'react-bootstrap/Container'
+import {Link} from 'react-router-dom';
 
   //<Box component="div" m={2} p={2} width={1}>  
 
@@ -17,7 +18,9 @@ class NavbarZT extends React.Component {
         displayNavbar() {
                                           
         const logo = <Box bgcolor="#c7f7d4" color="red" p={2} >
-                        <img src={logoImg} width="100" height="50" />
+                        <Link to={'/home'}>
+                          <img src={logoImg} width="100" height="50" />
+                        </Link>
                     </Box>
 
         const categories = (
