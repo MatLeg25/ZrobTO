@@ -1,11 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.OfferModel;
+import com.example.demo.model.Offer;
 import com.example.demo.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OfferService {
@@ -17,33 +18,28 @@ public class OfferService {
         this.offerRepository = offerRepository;
     }
 
-    public List<OfferModel> getAllOffers() {
+    public List<Offer> getAllOffers() {
         return offerRepository.findAll();
     }
 
-    public OfferModel getOfferById(int id) {
-        System.out.println("ide: "+id);
-        List<OfferModel> alls = getAllOffers();
-
-        //alls.forEach(offerModel -> System.out.println("ELO: "+offerModel.getId()));
+    public Offer getOfferById(UUID id) {
+        System.out.println("Requested ID: "+id);
         return this.offerRepository.getById(id);
     }
 
-    public void postOffer(OfferModel offerModel) {
-        offerRepository.save(offerModel);
+    public void postOffer(Offer offer) {
+        offerRepository.save(offer);
     }
 
-    public void updateOffer(OfferModel offerModel) {
-        OfferModel offerModelToUpdate = this.offerRepository.getById(offerModel.getId());
-
-        offerModelToUpdate.setTitle(offerModel.getTitle());
-        offerModelToUpdate.setDescription(offerModel.getDescription());
-        offerModelToUpdate.setPrice(offerModel.getPrice());
-
-        offerRepository.save(offerModelToUpdate);
+    public void updateOffer(Offer offer) {
+        Offer offerToUpdate = this.offerRepository.getById(offer.getId());
+        offerToUpdate.setTitle(offer.getTitle());
+        offerToUpdate.setDescription(offer.getDescription());
+        offerToUpdate.setPrice(offer.getPrice());
+        offerRepository.save(offerToUpdate);
     }
 
-    public void deleteOffer(int offerID) {
-        offerRepository.deleteById(offerID);
+    public void deleteOffer(UUID id) {
+        offerRepository.deleteById(id);
     }
 }

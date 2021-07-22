@@ -1,11 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.OfferModel;
+import com.example.demo.model.Offer;
 import com.example.demo.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -19,33 +20,33 @@ public class OfferController {
     }
 
     @GetMapping("/offer")
-    public List<OfferModel> get() {
+    public List<Offer> get() {
         //System.out.println("LOG => GET all");
         return offerService.getAllOffers();
     }
 
     @GetMapping("/offer/{id}")
-    public OfferModel getById(@PathVariable("id") int id) {
+    public Offer getById(@PathVariable("id") UUID id) {
         System.out.println("LOG => GET aby ID: "+id);
         return offerService.getOfferById(id);
     }
 
     @PostMapping("/offer")
     @CrossOrigin(origins = "http://localhost:3000")
-    public void post(@RequestBody OfferModel offerModel) {
-        System.out.println("LOG => From Post: "+offerModel.toString());
-        offerService.postOffer(offerModel);
+    public void post(@RequestBody Offer offer) {
+        System.out.println("LOG => From Post: "+ offer.toString());
+        offerService.postOffer(offer);
     }
 
     @PutMapping("/offer")
-    public void put(@RequestBody OfferModel offerModel) {
-        System.out.println("LOG => From Put: "+offerModel.toString());
-        offerService.updateOffer(offerModel);
+    public void put(@RequestBody Offer offer) {
+        System.out.println("LOG => From Put: "+ offer.toString());
+        offerService.updateOffer(offer);
     }
 
     @DeleteMapping("/offer")
-    public void delete(@RequestParam(name = "offerId") int offerID) {
-        System.out.println("LOG => From Delete: "+offerID);
-        offerService.deleteOffer(offerID);
+    public void delete(@RequestParam(name = "id") UUID id) {
+        System.out.println("LOG => From Delete: "+id);
+        offerService.deleteOffer(id);
     }
 }
