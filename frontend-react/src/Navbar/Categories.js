@@ -115,14 +115,14 @@ function podziel(array, column) {
 function getSubCategories(categoryIndex) {
   let elem=[];
 
-  const elements = [1, 2, 3, 4, 5, 6, 7, 8];
-  podziel(elements, 3); // [[1, 2, 3], [4, 5, 6], [7, 8]]
+  // const elements = [1, 2, 3, 4, 5, 6, 7, 8];
+  // //podziel(elements, 3); // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
   //console.log(chunked)
 
   {allSubCats[categoryIndex].map((name, index) =>
     elem.push(
-      <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={{color: "teal"}}>{name}</Link>
+      <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={{color: "teal"}}>{name}<br /></Link>
     )
 )}
 
