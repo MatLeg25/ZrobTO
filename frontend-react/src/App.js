@@ -28,7 +28,7 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <Switch>
             <Route path='/home'><LandingPage /></Route> 
-            <Route path='/category/:catID/subCategory/:subCatNameID/:subCatID?'> <SubCategoryPage /></Route>
+            <Route path='/category/:catID/subCategory/:subCatID?'> <SubCategoryPage /></Route>
             <Route path='/offerManager'><OfferManager /></Route>
             <Route path="/offers"><Offers/></Route>
             <Route path="/*"><NotFound /></Route>

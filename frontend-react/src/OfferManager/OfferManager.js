@@ -92,7 +92,7 @@ class OfferManager extends React.Component {
 
   deleteOffer(props) {
 
-    let param = 'offerId='+props;
+    let param = 'id='+props;
     
     fetch('http://localhost:8080/offer?'+param, {
       method: 'DELETE', 

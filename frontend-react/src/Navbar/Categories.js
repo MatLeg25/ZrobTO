@@ -81,40 +81,52 @@ const subCategories = [
     []
 ];
 const subCategories0 = [             
-    ["SubCatTitle1","SubCat1a","SubCat1b","SubCat1c"],
-    ["SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d"],
-    ["SubCatTitle3","SubCat3a","SubCat3b","SubCat3c"],
-    [],
+    "SubCatTitle1","SubCat1a","SubCat1b","SubCat1c",
+    "SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d",
+    "SubCatTitle3","SubCat3a","SubCat3b","SubCat3c",
 ];
 
-const allSubCats = [subCategories0, subCategories,subCategories0, subCategories0]
+const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0]
 
 const categoryNameTAB = categoriesName.map((name, index) =>
   <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
     );
 
 
-function getSubCategory(categoryIndex,subCatIndex) {
-  let elem = [];  
-  {allSubCats[categoryIndex][subCatIndex].map((name, index) =>
-          {if(index===0) {
-            //'/category/:catID/subCategory/:subCatNameID/:subCatID?'  
-            elem.push(<Link to={'category/'+categoryIndex+'/subCategory/'+subCatIndex} style={{color: "#00e676"}}><b>{name}</b><hr /></Link>)} 
-            else {
-              elem.push(
-                <Link to={'category/'+categoryIndex+'/subCategory/'+subCatIndex+'/'+index} style={{color: "teal"}}>{name}<hr /></Link>
-              )}
-          }
-        )}
-  return <Grid item xs={4} >{elem}</Grid>
+function podziel(array, column) {
+  console.log("podzielSTART")
+  let arr2D = [];
+  let tmp =[];
+  let counter=0;
+  for(let x=0;x<array.length;x++) {
+    if(counter<3) {
+      tmp.push(arr2D[x]);
+    }
+
+    counter=0;
+    x--;
+    tmp=[];
+  }
+
+  console.log(arr2D);
 }
 
-function getAllSubCategories(categoryIndex) {
-  const elems =[];
-  for(let subCatIndex in subCategories) {
-    elems.push(getSubCategory(categoryIndex,subCatIndex))
-  }
-  return elems;
+
+function getSubCategories(categoryIndex) {
+  let elem=[];
+
+  // const elements = [1, 2, 3, 4, 5, 6, 7, 8];
+  // //podziel(elements, 3); // [[1, 2, 3], [4, 5, 6], [7, 8]]
+
+  //console.log(chunked)
+
+  {allSubCats[categoryIndex].map((name, index) =>
+    elem.push(
+      <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={{color: "teal"}}>{name}<br /></Link>
+    )
+)}
+
+  return <Grid item xs={6} >{elem}</Grid>
 }
 
 
@@ -123,10 +135,10 @@ function getCategoriesTABPanel() {
   for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
         elems.push(
         <TabPanel value={value} index={CatIndex} dir={theme.direction}>
-          <Grid container spacing={6} direction="column" alignItems='center' justifyContent='flex-end'>
+          <Grid container spacing={6} direction="column" alignItems='center' alignItems="center">
 
-            <Grid item xs={12} container spacing={3} alignItems='stretch' justifyContent='center' minHeight="100vh">
-                  {getAllSubCategories(value)}
+            <Grid item xs={12} container spacing={3} direction="column" alignItems='stretch' justifyContent='center' minHeight="100vh" item="true">
+                  {getSubCategories(value)}
             </Grid>
 
           </Grid>
