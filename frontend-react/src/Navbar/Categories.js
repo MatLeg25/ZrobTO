@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
+import { borders } from '@material-ui/system';
+
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
@@ -70,90 +72,85 @@ export default function FullWidthTabs() {
     setValue(index);
   };
 
-///////////////////////////////////
-//TODO: rethink data format for category: [name<=>icon<=>subcats]
-const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
-const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
-const subCategories = [             
-    ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-    ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-    ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-    []
-];
-const subCategories0 = [             
-    "SubCatTitle1","SubCat1a","SubCat1b","SubCat1c",
-    "SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d",
-    "SubCatTitle3","SubCat3a","SubCat3b","SubCat3c",
-];
+  ///////////////////////////////////
+  //TODO: rethink data format for category: [name<=>icon<=>subcats]
+  const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
+  const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
+  const subCategories = [             
+      ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
+      ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
+      ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
+      []
+  ];
+  const subCategories0 = [             
+      "SubCatTitle1","SubCat1a","SubCat1b","SubCat1c",
+      "SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d",
+      "SubCatTitle3","SubCat3a","SubCat3b","SubCat3c",
+  ];
 
-const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0]
+  const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0]
 
-const categoryNameTAB = categoriesName.map((name, index) =>
-  <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
-    );
-
-
-function podziel(array, column) {
-  console.log("podzielSTART")
-  let arr2D = [];
-  let tmp =[];
-  let counter=0;
-  for(let x=0;x<array.length;x++) {
-    if(counter<3) {
-      tmp.push(arr2D[x]);
-    }
-
-    counter=0;
-    x--;
-    tmp=[];
-  }
-
-  console.log(arr2D);
-}
+  const categoryNameTAB = categoriesName.map((name, index) =>
+    <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
+      );
 
 
-function getSubCategories(categoryIndex) {
-  let elem=[];
+  function getSubCategories(categoryIndex) {
 
-  // const elements = [1, 2, 3, 4, 5, 6, 7, 8];
-  // //podziel(elements, 3); // [[1, 2, 3], [4, 5, 6], [7, 8]]
+    const numItemsPerRow = 3;
 
-  //console.log(chunked)
+    const containerStyle = { 
+      display: "flex", 
+      width: "100%", 
+      flexWrap: "wrap" 
+    };
 
-  {allSubCats[categoryIndex].map((name, index) =>
-    elem.push(
-      <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={{color: "teal"}}>{name}<br /></Link>
-    )
-)}
+    const itemStyle = {
+      minWidth: `${100 / numItemsPerRow}%`,
+      textAlign: "center",
+      padding: "2%",
+      boxSizing: "border-box",
+      color: "teal"
+    };
 
-  return <Grid item xs={6} >{elem}</Grid>
-}
+    let elem = [];
 
-
-function getCategoriesTABPanel() {
-  const elems =[];
-  for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
-        elems.push(
-        <TabPanel value={value} index={CatIndex} dir={theme.direction}>
-          <Grid container spacing={6} direction="column" alignItems='center' alignItems="center">
-
-            <Grid item xs={12} container spacing={3} direction="column" alignItems='stretch' justifyContent='center' minHeight="100vh" item="true">
-                  {getSubCategories(value)}
-            </Grid>
-
-          </Grid>
-        </TabPanel>
+    {allSubCats[categoryIndex].map((name, index) =>
+      elem.push(
+        <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={itemStyle}>{name}</Link>
       )
+    )}
+    
+    return <Grid item xs={12} style={containerStyle}>{elem}</Grid>
   }
-  return elems;
 
-}
+
+  function getCategoriesTABPanel() {
+    const elems =[];
+    for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
+          elems.push(
+          <TabPanel value={value} index={CatIndex} dir={theme.direction}>
+            <Grid container spacing={6} direction="column" alignItems='center' alignItems="center">
+
+              <Grid item xs={12} container spacing={3} direction="column" alignItems='center' justifyContent='center' minHeight="100vh" item="true">
+                    {getSubCategories(value)}
+              </Grid>
+
+            </Grid>
+          </TabPanel>
+        )
+    }
+    return elems;
+
+  }
 
   /////////////////////////////////////
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
+    // style={{  position: 'absolute',top: '1vw',right: '-3vw', border: '1px solid #e0e0e0'}}
+    <div className={classes.root}  >
+      <AppBar position="static" 
+      color="default">
         <Tabs
           value={value}
           onChange={handleChange}

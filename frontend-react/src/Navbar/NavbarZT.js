@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom';
 
 import Categories from './Categories';
 import logoImg from '../resources/logoV1.png';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 class NavbarZT extends React.Component {
 
@@ -24,8 +25,11 @@ class NavbarZT extends React.Component {
                     </Box>
 
         const categories = (
-                          <NavDropdown title="Kategorie" id="nav-dropdown">
-                            <Categories />
+                          <NavDropdown title="Kategorie"
+                          align={{ lg: 'end' }}
+                          id="dropdown-menu-align-responsive-2"
+                          >
+                                <Categories  />
                           </NavDropdown>
         )
 
@@ -38,8 +42,6 @@ class NavbarZT extends React.Component {
             <Navbar.Collapse className="justify-content-end">
               <Nav>
               {categories}
-                {/* <Categories /> */}
-             
                 <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
                 <Nav.Link href="#link">Zaloguj się</Nav.Link>
                 <Button variant="outline-success" >DOŁĄCZ</Button>
