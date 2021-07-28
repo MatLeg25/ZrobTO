@@ -26,8 +26,8 @@ class NavbarZT extends React.Component {
 
         const categories = (
                           <NavDropdown title="Kategorie"
-                          align={{ lg: 'end' }}
                           id="dropdown-menu-align-responsive-2"
+                          drop = 'start'
                           >
                                 <Categories  />
                           </NavDropdown>
