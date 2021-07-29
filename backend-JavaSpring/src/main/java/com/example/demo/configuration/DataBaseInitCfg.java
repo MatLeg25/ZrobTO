@@ -1,8 +1,10 @@
 package com.example.demo.configuration;
 
 import com.example.demo.model.Category;
+import com.example.demo.model.Offer;
 import com.example.demo.model.Subcategory;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.repository.OfferRepository;
 import com.example.demo.repository.SubcategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ public class DataBaseInitCfg {
 
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subCategoryRepository;
+    private final OfferRepository offerRepository;
 
     private final List<String> CATEGORIES = Arrays.asList(
             "Grafika i design",
@@ -53,14 +56,16 @@ public class DataBaseInitCfg {
 
 
     @Autowired
-    public DataBaseInitCfg(CategoryRepository categoryRepository, SubcategoryRepository subCategoryRepository) {
+    public DataBaseInitCfg(CategoryRepository categoryRepository, SubcategoryRepository subCategoryRepository, OfferRepository offerRepository) {
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
+        this.offerRepository = offerRepository;
         addInitialConfig();
     }
 
     private void addInitialConfig() {
         addCategories();
+        addOffers();
     }
 
     private void addCategories() {
@@ -76,4 +81,16 @@ public class DataBaseInitCfg {
         categories.forEach((category -> SUB_CATEGORIES_LIST.get(category.getId()-1).forEach((subcategory) ->
                 this.subCategoryRepository.save(new Subcategory(1,subcategory,category)))));
     }
+
+    private void addOffers() {
+        Category category = new Category("Kategoria",'x');
+        Subcategory subcategory = new Subcategory(111,"Podkategortia",category);
+        List<Offer> offers = new ArrayList<>();
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
+//        Offer offer1 = new Offer(uuid,uuid,"Sample offer", "Description", 100,2,3,'O',subcategory);
+        Offer offer1 = new Offer("Sample offer", "Description", 100,2,3,'O',subcategory);
+        this.offerRepository.save(offer1);
+    }
+
 }
