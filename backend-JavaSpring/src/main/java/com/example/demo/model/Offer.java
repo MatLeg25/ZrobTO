@@ -26,7 +26,7 @@ public class Offer {
     private int deliveryTime;
     private int revisions;
 
-    @OneToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "file_id")
     private FileEntity fileEntity;
 

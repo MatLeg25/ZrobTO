@@ -35,6 +35,6 @@ public class FileEntity {
         this.data = data;
     }
 
-    @OneToOne(mappedBy="fileEntity", fetch= FetchType.LAZY)
-    private Offer offer;
+    @OneToMany(mappedBy="fileEntity", fetch= FetchType.LAZY)
+    private List<Offer> offers;
 }
