@@ -1,14 +1,18 @@
 package com.example.demo.configuration;
 
 import com.example.demo.model.Category;
+import com.example.demo.model.FileEntity;
 import com.example.demo.model.Offer;
 import com.example.demo.model.Subcategory;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.repository.FileRepository;
 import com.example.demo.repository.OfferRepository;
 import com.example.demo.repository.SubcategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 
 @Configuration
@@ -17,6 +21,7 @@ public class DataBaseInitCfg {
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subCategoryRepository;
     private final OfferRepository offerRepository;
+    private final FileRepository fileRepository;
     private final Random random= new Random();
 
     private final List<String> CATEGORIES = Arrays.asList(
@@ -57,17 +62,19 @@ public class DataBaseInitCfg {
 
 
     @Autowired
-    public DataBaseInitCfg(CategoryRepository categoryRepository, SubcategoryRepository subCategoryRepository, OfferRepository offerRepository) {
+    public DataBaseInitCfg(CategoryRepository categoryRepository, SubcategoryRepository subCategoryRepository, OfferRepository offerRepository, FileRepository fileRepository) {
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
         this.offerRepository = offerRepository;
-        addInitialConfig();
+        this.fileRepository = fileRepository;
+        setInitialConfig();
     }
 
-    private void addInitialConfig() {
+    private void setInitialConfig() {
         addCategories();
         addSubcategories();
         addOffers();
+        addDefaultImage();
     }
 
     private void addCategories() {
@@ -95,6 +102,22 @@ public class DataBaseInitCfg {
                 (subcategory -> {
                     this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, 'O',subcategory));
                 }));
+    }
+
+    private void addDefaultImage() {
+        File file= new File("src/main/resources/static/example-offer.jpg");
+        byte[] imageData = new byte[(int) file.length()];
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(imageData);
+            fileInputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FileEntity fileEntity = new FileEntity("example-offer","image/jpeg",53510L,imageData);
+        this.fileRepository.save(fileEntity);
     }
 
 }

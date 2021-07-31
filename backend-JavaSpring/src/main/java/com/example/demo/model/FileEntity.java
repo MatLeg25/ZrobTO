@@ -28,4 +28,11 @@ public class FileEntity {
 
     @Lob
     private byte[] data;
+
+    public FileEntity(String name, String contentType, Long size, byte[] data) {
+        this.name = name;
+        this.contentType = contentType;
+        this.size = size;
+        this.data = data;
+    }
 }
