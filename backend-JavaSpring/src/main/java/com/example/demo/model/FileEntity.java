@@ -1,16 +1,15 @@
 package com.example.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+import java.util.UUID;
+
 @Entity
-@Table(name = "files")
+@Table(name = "file")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,4 +34,7 @@ public class FileEntity {
         this.size = size;
         this.data = data;
     }
+
+    @OneToOne(mappedBy="fileEntity", fetch= FetchType.LAZY)
+    private Offer offer;
 }

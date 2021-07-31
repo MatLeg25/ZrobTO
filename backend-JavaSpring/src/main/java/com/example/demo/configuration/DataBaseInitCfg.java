@@ -71,10 +71,26 @@ public class DataBaseInitCfg {
     }
 
     private void setInitialConfig() {
+        addDefaultImage();
         addCategories();
         addSubcategories();
         addOffers();
-        addDefaultImage();
+    }
+
+    private void addDefaultImage() {
+        File file= new File("src/main/resources/static/example-offer.jpg");
+        byte[] imageData = new byte[(int) file.length()];
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(imageData);
+            fileInputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FileEntity fileEntity = new FileEntity("example-offer.jpg","image/jpeg",53510L,imageData);
+        this.fileRepository.save(fileEntity);
     }
 
     private void addCategories() {
@@ -94,30 +110,14 @@ public class DataBaseInitCfg {
                 this.subCategoryRepository.save(new Subcategory(subcategory,category)))));
     }
 
-
     //generate one offer with random properties for each subcategory
     private void addOffers() {
+        FileEntity fileEntity = this.fileRepository.findAll().get(0);
         List<Subcategory> subcategories = this.subCategoryRepository.findAll();
         subcategories.forEach(
                 (subcategory -> {
-                    this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, 'O',subcategory));
+                    this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, fileEntity,subcategory));
                 }));
-    }
-
-    private void addDefaultImage() {
-        File file= new File("src/main/resources/static/example-offer.jpg");
-        byte[] imageData = new byte[(int) file.length()];
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            fileInputStream.read(imageData);
-            fileInputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        FileEntity fileEntity = new FileEntity("example-offer","image/jpeg",53510L,imageData);
-        this.fileRepository.save(fileEntity);
     }
 
 }

@@ -25,20 +25,24 @@ public class Offer {
     private int price;
     private int deliveryTime;
     private int revisions;
-    private char image;
+
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "file_id")
+    private FileEntity fileEntity;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="subcategory_id")
     private Subcategory subcategory;
 
-    public Offer(String title, String description, int price, int deliveryTime, int revisions, char image, Subcategory subcategory) {
+    public Offer(String title, String description, int price, int deliveryTime, int revisions, FileEntity fileEntity, Subcategory subcategory) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.deliveryTime = deliveryTime;
         this.revisions = revisions;
-        this.image = image;
+        this.fileEntity = fileEntity;
         this.subcategory = subcategory;
     }
+
 
 }
