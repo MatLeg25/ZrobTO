@@ -17,6 +17,7 @@ public class DataBaseInitCfg {
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subCategoryRepository;
     private final OfferRepository offerRepository;
+    private final Random random= new Random();
 
     private final List<String> CATEGORIES = Arrays.asList(
             "Grafika i design",
@@ -65,6 +66,7 @@ public class DataBaseInitCfg {
 
     private void addInitialConfig() {
         addCategories();
+        addSubcategories();
         addOffers();
     }
 
@@ -77,20 +79,22 @@ public class DataBaseInitCfg {
         // 1. Relacja one-to-many (obiekt-do-listaObiektów) || czy da się tak jak na schemacie DB: id(int) - category_id(int)
         // 2. nasza implementacja: autokonfigurator, one-to-many
         categories.forEach((category) -> System.out.println(category));
-
-        categories.forEach((category -> SUB_CATEGORIES_LIST.get(category.getId()-1).forEach((subcategory) ->
-                this.subCategoryRepository.save(new Subcategory(1,subcategory,category)))));
     }
 
+    private void addSubcategories() {
+        List<Category> categories =this.categoryRepository.findAll();
+        categories.forEach((category -> SUB_CATEGORIES_LIST.get(category.getId()-1).forEach((subcategory) ->
+                this.subCategoryRepository.save(new Subcategory(subcategory,category)))));
+    }
+
+
+    //generate one offer with random properties for each subcategory
     private void addOffers() {
-        Category category = new Category("Kategoria",'x');
-        Subcategory subcategory = new Subcategory(111,"Podkategortia",category);
-        List<Offer> offers = new ArrayList<>();
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
-//        Offer offer1 = new Offer(uuid,uuid,"Sample offer", "Description", 100,2,3,'O',subcategory);
-        Offer offer1 = new Offer("Sample offer", "Description", 100,2,3,'O',subcategory);
-        this.offerRepository.save(offer1);
+        List<Subcategory> subcategories = this.subCategoryRepository.findAll();
+        subcategories.forEach(
+                (subcategory -> {
+                    this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, 'O',subcategory));
+                }));
     }
 
 }

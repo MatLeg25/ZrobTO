@@ -18,14 +18,13 @@ public class Subcategory {
     private int id;
     private String name;
 
-    public Subcategory(int id, String name, Category category) {
-        this.id = id;
+    public Subcategory(String name, Category category) {
         this.name = name;
         this.category = category;
     }
 
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="category_id", nullable=false, updatable = false)
+    @JoinColumn(name="category_id")
     private Category category;
 
     @OneToMany(mappedBy="subcategory", fetch= FetchType.LAZY)
