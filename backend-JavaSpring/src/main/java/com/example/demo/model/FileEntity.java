@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -36,5 +38,6 @@ public class FileEntity {
     }
 
     @OneToMany(mappedBy="fileEntity", fetch= FetchType.LAZY)
+    @JsonManagedReference
     private List<Offer> offers;
 }

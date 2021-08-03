@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Subcategory {
     private Category category;
 
     @OneToMany(mappedBy="subcategory", fetch= FetchType.LAZY)
-    @JsonIgnore
+    @JsonManagedReference
     private List<Offer> offers;
 
 

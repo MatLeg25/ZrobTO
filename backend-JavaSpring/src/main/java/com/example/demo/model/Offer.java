@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,7 +31,7 @@ public class Offer {
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "file_id")
-    @JsonIgnore
+    @JsonBackReference
     private FileEntity fileEntity;
 
     @ManyToOne(fetch= FetchType.LAZY)

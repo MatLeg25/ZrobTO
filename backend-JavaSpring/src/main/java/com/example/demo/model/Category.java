@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ public class Category {
     }
 
     @OneToMany(mappedBy="category", fetch= FetchType.LAZY)
+   // @JsonBackReference
     private List<Subcategory> subcategories;
 
 
