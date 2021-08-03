@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,10 +29,12 @@ public class Offer {
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "file_id")
+    @JsonIgnore
     private FileEntity fileEntity;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="subcategory_id")
+    @JsonIgnore
     private Subcategory subcategory;
 
     public Offer(String title, String description, int price, int deliveryTime, int revisions, FileEntity fileEntity, Subcategory subcategory) {
