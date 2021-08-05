@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class FileEntity {
     private Long size;
 
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] data;
 
     public FileEntity(String name, String contentType, Long size, byte[] data) {
