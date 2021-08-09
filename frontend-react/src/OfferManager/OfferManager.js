@@ -53,12 +53,35 @@ class OfferManager extends React.Component {
 
     //build object (JSON) from data
     const newOffer = {
-      id: -1, //id is set by server
+      //id: -1, //id is set by server
       title: data.get("title"),
       description: data.get("description"),
       price: data.get("price"),
-      date: data.get("date")
+      delivery_time: data.get("delivery_time"),
+      revisions: data.get("revisions"),
+      date: data.get("date"),
+      //file_id: data.get("file"),
+      subcategory_id: data.get("subcategory_id")
     }
+
+    ///////////////////////////////////////////////////////////////upload FILE
+    let formData = new FormData();
+    formData.append("file", data.get("file"));
+  
+    fetch('http://localhost:8080/files', {
+        method: 'POST', 
+//Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
+        body: formData,
+      })
+      .then(() => { this.getAllOfers()}) // reload from DB after add new offer
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+    //////////////////////////////////////////////////////////////////////////////////////
 
     console.log("Added new offer:  " + newOffer);
   
@@ -147,22 +170,48 @@ class OfferManager extends React.Component {
   displayForm() {
     return (
       <form onSubmit={this.handleSubmit} >
+
+        <div class="mb-3">
+          <label htmlFor="user_id" class="form-label">User ID</label>
+          <input type="text" id="user_id" name="user_id" class="form-control" value='123456' readOnly class="form-control" id="disabledTextInput"/>
+        </div>
+        <div class="mb-3">
+          <label htmlFor="date" class="form-label">Date</label>
+          <input type="text" id="date" name="date" value={this.getCurrentDate()} readOnly class="form-control" id="disabledTextInput" />
+        </div>
+
         <div class="mb-3">
           <label htmlFor="title" class="form-label">Title</label>
           <input type="text" id="title" name="title" class="form-control" placeholder="Enter title"/>
-          {/* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> */}
         </div>
         <div class="mb-3">
           <label htmlFor="description" class="form-label">Description</label>
           <input type="text" id="description" name="description" class="form-control" placeholder="Enter description"/>
         </div>
         <div class="mb-3">
+          <label htmlFor="delivery-time" class="form-label">Delivery time</label>
+          <input type="number" min="0" id="delivery-time" name="delivery-time" class="form-control" placeholder="Enter delivery time"/>
+        </div>
+        <div class="mb-3">
+          <label htmlFor="revisions" class="form-label">Revisions</label>
+          <input type="number" min="0" id="revisions" name="revisions" class="form-control" placeholder="Enter delivery time (days)"/>
+        </div>
+        <div class="mb-3">
           <label htmlFor="price" class="form-label">Price</label>
           <input type="text" id="price" name="price" class="form-control" placeholder="Enter price"/>
         </div>
         <div class="mb-3">
-          <label htmlFor="date" class="form-label">Date</label>
-          <input type="text" id="date" name="date" value={this.getCurrentDate()} readOnly class="form-control" id="disabledTextInput" />
+          <label htmlFor="category" class="form-label">Category</label>
+          <input type="text" id="category" name="category" class="form-control" placeholder="Select category"/>
+        </div>
+        <div class="mb-3">
+          <label htmlFor="subcategory" class="form-label">Subcategory</label>
+          <input type="text" id="subcategory" name="subcategory" class="form-control" placeholder="Select subcategory"/>
+        </div>
+
+        <div class="mb-3">
+          <label htmlFor="file" class="form-label">Image</label>
+          <input type="file" id="file" name="file" class="form-control" placeholder="Upload image" />
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -219,6 +268,7 @@ class OfferManager extends React.Component {
       </Modal>
 
       <button type="button" class="btn btn-light"  onClick={this.getAllOfers}>Refresh</button>
+      
 
     </div>)
 }

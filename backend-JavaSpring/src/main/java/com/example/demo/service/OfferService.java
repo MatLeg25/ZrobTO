@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,9 +24,9 @@ public class OfferService {
         return offerRepository.findAll();
     }
 
-    public Offer getOfferById(UUID id) {
+    public Optional<Offer> getOfferById(UUID id) {
         System.out.println("Requested ID: "+id);
-        return this.offerRepository.getById(id);
+        return this.offerRepository.findById(id);
     }
 
     public void postOffer(Offer offer) {

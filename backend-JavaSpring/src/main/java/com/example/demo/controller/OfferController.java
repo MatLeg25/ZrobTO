@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +27,7 @@ public class OfferController {
     }
 
     @GetMapping("/offer/{id}")
-    public Offer getById(@PathVariable("id") UUID id) {
+    public Optional<Offer> getById(@PathVariable("id") UUID id) {
         System.out.println("LOG => GET aby ID: "+id);
         return offerService.getOfferById(id);
     }

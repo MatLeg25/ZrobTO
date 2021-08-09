@@ -5,7 +5,7 @@ import Offers from "./components/pages/Offers"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
 //Routing
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import SubCategoryPage from './SubCategoryPage';
 import NotFound from './NotFound';
