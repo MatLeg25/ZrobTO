@@ -29,21 +29,21 @@ public class FilesController {
         this.fileService = fileService;
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
-        System.out.println("IMAGE FROM POST");
-        System.out.println(file.toString());
-        try {
-            fileService.save(file);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                                 .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body(String.format("Could not upload the file: %s!", file.getOriginalFilename()));
-        }
-    }
+//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
+//        System.out.println("IMAGE FROM POST");
+//        System.out.println(file.toString());
+//        try {
+//            fileService.save(file);
+//
+//            return ResponseEntity.status(HttpStatus.OK)
+//                                 .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                                 .body(String.format("Could not upload the file: %s!", file.getOriginalFilename()));
+//        }
+//    }
 
     @GetMapping
     public List<FileResponse> list() {

@@ -28,7 +28,7 @@ public class Category {
     }
 
     @OneToMany(mappedBy="category", fetch= FetchType.LAZY)
-   // @JsonBackReference
+    @JsonBackReference //remove this to have nested subcategories
     private List<Subcategory> subcategories;
 
 

@@ -60,19 +60,70 @@ class OfferManager extends React.Component {
       delivery_time: data.get("delivery_time"),
       revisions: data.get("revisions"),
       date: data.get("date"),
+      category: data.get("category"),
       //file_id: data.get("file"),
       subcategory_id: data.get("subcategory_id")
     }
 
+    console.log(newOffer)
+
+        //add new offer to state in the last position
+    this.setState({
+      offers: [...this.state.offers, newOffer]
+    })
+
     ///////////////////////////////////////////////////////////////upload FILE
+//     let formData = new FormData();
+//     formData.append("file", data.get("file"));
+  
+//     fetch('http://localhost:8080/files', {
+//         method: 'POST', 
+// //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
+//         body: formData,
+//       })
+//       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
+//       .then(data => {
+//         console.log('Success:', data);
+//       })
+//       .catch((error) => {
+//         console.error('Error:', error);
+//       });
+
+//     //////////////////////////////////////////////////////////////////////////////////////
+
+//     console.log("Added new offer:  " + newOffer);
+  
+//     //add new offer to state in the last position
+//     this.setState({
+//       offers: [...this.state.offers, newOffer]
+//     })
+
+//     fetch('http://localhost:8080/offer', {
+//         method: 'POST', 
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(newOffer),
+//       })
+//       // .then(response => response.json())
+//       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
+//       .then(data => {
+//         console.log('Success:', data);
+//       })
+//       .catch((error) => {
+//         console.error('Error:', error);
+//       });
+
+      ///////////////////TEST post offer and image
     let formData = new FormData();
     formData.append("file", data.get("file"));
   
-    fetch('http://localhost:8080/files', {
+    fetch('http://localhost:8080/offer1', {
         method: 'POST', 
 //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
         body: formData,
       })
+      .then(() => { this.postOffer(newOffer)}) // POST OFFER
       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
       .then(data => {
         console.log('Success:', data);
@@ -81,21 +132,17 @@ class OfferManager extends React.Component {
         console.error('Error:', error);
       });
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
     console.log("Added new offer:  " + newOffer);
   
-    //add new offer to state in the last position
-    this.setState({
-      offers: [...this.state.offers, newOffer]
-    })
+  }
 
-    fetch('http://localhost:8080/offer', {
+  postOffer(offer) {
+    fetch('http://localhost:8080/offer2', {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newOffer),
+        body: JSON.stringify(offer),
       })
       // .then(response => response.json())
       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
@@ -168,6 +215,7 @@ class OfferManager extends React.Component {
 
 
   displayForm() {
+
     return (
       <form onSubmit={this.handleSubmit} >
 
@@ -201,8 +249,14 @@ class OfferManager extends React.Component {
           <input type="text" id="price" name="price" class="form-control" placeholder="Enter price"/>
         </div>
         <div class="mb-3">
-          <label htmlFor="category" class="form-label">Category</label>
-          <input type="text" id="category" name="category" class="form-control" placeholder="Select category"/>
+          <label htmlFor="category" class="form-label">Select Category</label>
+            <select id="category" name="category">
+              <option value="Grafika i Design">Grafika i Design</option>
+              <option value="Digital Marketing">Digital Marketing</option>
+              <option value="Foto i wideo">Foto i wideo</option>
+              <option value="Programowanie">Programowanie</option>
+              <option value="Pozostałe">Pozostałe</option>
+            </select>
         </div>
         <div class="mb-3">
           <label htmlFor="subcategory" class="form-label">Subcategory</label>

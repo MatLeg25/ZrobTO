@@ -32,12 +32,12 @@ public class OfferController {
         return offerService.getOfferById(id);
     }
 
-    @PostMapping("/offer")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public void post(@RequestBody Offer offer) {
-        System.out.println("LOG => From Post: "+ offer.toString());
-        offerService.postOffer(offer);
-    }
+//    @PostMapping("/offer")
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    public void post(@RequestBody Offer offer) {
+//        System.out.println("LOG => From Post: "+ offer.toString());
+//        offerService.postOffer(offer);
+//    }
 
     @PutMapping("/offer")
     public void put(@RequestBody Offer offer) {
