@@ -12,17 +12,18 @@ import {Link} from 'react-router-dom';
 import Categories from './Categories';
 import logoImg from '../resources/logoV1.png';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import Grid from "@material-ui/core/Grid";
 
 class NavbarZT extends React.Component {
 
 
-        displayNavbar() {
-                                          
-        const logo = <Box bgcolor="#c7f7d4" color="red" p={2} >
-                        <Link to={'/home'}>
-                          <img src={logoImg} width="100" height="50" />
-                        </Link>
-                    </Box>
+    displayNavbar() {
+
+        const logo = <Box bgcolor="#c7f7d4" color="red" p={2}>
+            <Link to={'/home'}>
+                <img src={logoImg} width="100" height="50"/>
+            </Link>
+        </Box>
 
         const categories = (
                           <NavDropdown title="Kategorie"

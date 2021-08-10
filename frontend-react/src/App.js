@@ -1,5 +1,5 @@
 import './App.css';
-import React, {} from 'react';  
+import React, {useState, useEffect} from 'react';
 import LandingPage from "./LandingPage";
 import Offers from "./components/pages/Offers"
 import {createTheme, ThemeProvider} from "@material-ui/core";
@@ -12,13 +12,13 @@ import NotFound from './NotFound';
 import OfferManager from './OfferManager/OfferManager'
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1DBF73',
-      secondary: '#03543F',
-      contrastText: 'white',
+    palette: {
+        primary: {
+            main: '#1DBF73',
+            secondary: '#03543F',
+            contrastText: 'white',
+        }
     }
-  }
 })
 
 
