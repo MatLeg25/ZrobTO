@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,17 +27,17 @@ public class OfferController {
     }
 
     @GetMapping("/offer/{id}")
-    public Offer getById(@PathVariable("id") UUID id) {
+    public Optional<Offer> getById(@PathVariable("id") UUID id) {
         System.out.println("LOG => GET aby ID: "+id);
         return offerService.getOfferById(id);
     }
 
-    @PostMapping("/offer")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public void post(@RequestBody Offer offer) {
-        System.out.println("LOG => From Post: "+ offer.toString());
-        offerService.postOffer(offer);
-    }
+//    @PostMapping("/offer")
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    public void post(@RequestBody Offer offer) {
+//        System.out.println("LOG => From Post: "+ offer.toString());
+//        offerService.postOffer(offer);
+//    }
 
     @PutMapping("/offer")
     public void put(@RequestBody Offer offer) {

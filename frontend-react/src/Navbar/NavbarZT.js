@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import Container from 'react-bootstrap/Container'
 import {Link} from 'react-router-dom';
 
-//<Box component="div" m={2} p={2} width={1}>
+  //<Box component="div" m={2} p={2} width={1}>  
 
 import Categories from './Categories';
 import logoImg from '../resources/logoV1.png';
@@ -26,39 +26,36 @@ class NavbarZT extends React.Component {
         </Box>
 
         const categories = (
-            <NavDropdown title="Kategorie"
-                         align={{lg: 'end'}}
-                         id="dropdown-menu-align-responsive-2"
-            >
-                <Categories/>
-            </NavDropdown>
+                          <NavDropdown title="Kategorie"
+                          id="dropdown-menu-align-responsive-2"
+                          drop = 'start'
+                          >
+                                <Categories  />
+                          </NavDropdown>
         )
-        return (
 
+          return (
+            <Container >
+        
             <Navbar bg="light" expand="lg" sticky="top">
-                <Grid container>
-                    <Grid item xs={0} sm={2}></Grid>
-                    <Grid item> {logo} </Grid>
-                    <Grid container item xs={12} sm={8}>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                        <Navbar.Collapse className="justify-content-end">
-                            <Nav>
-                                {categories}
-                                <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
-                                <Nav.Link href="#link">Zaloguj się</Nav.Link>
-                                <Button variant="outline-success">DOŁĄCZ</Button>
-                            </Nav>
-                </Navbar.Collapse>
-                    </Grid>
-                    <Grid item xs={0} sm={2}></Grid>
-                </Grid>
-    </Navbar>
-
-    )
-    }
+            {logo}
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse className="justify-content-end">
+              <Nav>
+              {categories}
+                <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
+                <Nav.Link href="#link">Zaloguj się</Nav.Link>
+                <Button variant="outline-success" >DOŁĄCZ</Button>
+                </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          
+          </Container>
+            )
+          }
 
 
-    render() {
+          render() {
         return this.displayNavbar();
     }
 

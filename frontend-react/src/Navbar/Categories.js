@@ -15,6 +15,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
 import DvrIcon from '@material-ui/icons/Dvr';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import PagesIcon from '@material-ui/icons/Pages';
 
 
 
@@ -74,8 +75,8 @@ export default function FullWidthTabs() {
 
   ///////////////////////////////////
   //TODO: rethink data format for category: [name<=>icon<=>subcats]
-  const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie"];
-  const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />];
+  const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie", "Pozostałe"];
+  const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />, <PagesIcon />];
   const subCategories = [             
       ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
       ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
@@ -88,7 +89,7 @@ export default function FullWidthTabs() {
       "SubCatTitle3","SubCat3a","SubCat3b","SubCat3c",
   ];
 
-  const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0]
+  const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0, subCategories0]
 
   const categoryNameTAB = categoriesName.map((name, index) =>
     <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
