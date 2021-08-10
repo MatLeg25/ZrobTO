@@ -1,6 +1,8 @@
 //import './App.css';
 import React, {Component, useState} from 'react';  
 import {Button, Modal} from 'react-bootstrap'
+import BigCard from "../components/BigCard"
+import axios from "axios";
 
 class OfferManager extends React.Component {
   constructor() {
@@ -22,8 +24,8 @@ class OfferManager extends React.Component {
 
 
   getAllOfers() {
-    fetch('http://localhost:8080/offer')
-      .then(response => response.json())
+      axios.get('http://localhost:8080/offer')
+      .then(response => response.data)
      // .then(data => JSON.stringify(data))
       .then(data => {
          this.setState({ offers: data });
@@ -33,8 +35,8 @@ class OfferManager extends React.Component {
 
 
   getOfferById(props) {
-    fetch('http://localhost:8080/offer/'+props)
-      .then(response => response.json())
+    axios.get('http://localhost:8080/offer/'+props)
+      .then(response => response.data)
      // .then(data => JSON.stringify(data))
       .then(data => {
          //this.setState({ offers: data });
@@ -180,23 +182,27 @@ class OfferManager extends React.Component {
 
     objectsList.forEach(element => {
       let tmpID = element['id'];
-        const offer = <h2>
+        // const offer = <h2>
+        //
+        //                 <div class="spinner-grow text-primary" role="status">
+        //                   <span class="visually-hidden">Loading...</span>
+        //                 </div>
+        //
+        //                 <span class="badge rounded-pill bg-info text-dark" >{element['id']}</span>
+        //                 <span class="badge rounded-pill bg-info text-dark">{element['title']}</span>
+        //                 <span class="badge rounded-pill bg-info text-dark">{element['description']}</span>
+        //                 <span class="badge rounded-pill bg-info text-dark">{element['price']}</span>
+        //                 <span class="badge rounded-pill bg-info text-dark">{element['date']}</span>
+        //
+        //                 <button type="button" class="btn btn-warning" id={'edit-'+element['id']} onClick={() => this.updateOffer(tmpID)}>Edit</button>
+        //                 <button type="button" class="btn btn-danger" id={'delete-'+element['id']} onClick={() => this.deleteOffer(tmpID)}>Delete</button>
+        //
+        //               </h2>
 
-                        <div class="spinner-grow text-primary" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
 
-                        <span class="badge rounded-pill bg-info text-dark" >{element['id']}</span> 
-                        <span class="badge rounded-pill bg-info text-dark">{element['title']}</span> 
-                        <span class="badge rounded-pill bg-info text-dark">{element['description']}</span> 
-                        <span class="badge rounded-pill bg-info text-dark">{element['price']}</span> 
-                        <span class="badge rounded-pill bg-info text-dark">{element['date']}</span>
+        const offer = <BigCard offer={element}/>
 
-                        <button type="button" class="btn btn-warning" id={'edit-'+element['id']} onClick={() => this.updateOffer(tmpID)}>Edit</button>
-                        <button type="button" class="btn btn-danger" id={'delete-'+element['id']} onClick={() => this.deleteOffer(tmpID)}>Delete</button>
-                      
-                      </h2>
-        listOffers.push(<li key = {listOffers.length} >{offer}</li>)
+        listOffers.push(<div key = {listOffers.length} >{offer}</div>)
     });
     return listOffers;
   }

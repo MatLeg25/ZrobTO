@@ -21,20 +21,6 @@ const theme = createTheme({
     }
 })
 
-// const Offers = () => {
-//
-//     const fetchOffers = () => {
-//         axios.get("http://localhost:8080/offer").then(res => {
-//             console.log(res);
-//         })
-//     }
-//
-//     useEffect(() => {
-//         fetchOffers()
-//     }, [])
-// }
-
-
 const App = () => (
     <Router>
 
