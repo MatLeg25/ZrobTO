@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 
 
-export default function MediaCard() {
+export default function MediaCard(props) {
     const classes = useStyles();
 
     return (
@@ -30,15 +30,16 @@ export default function MediaCard() {
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image="./resources/big-card-image.jpg"
+                    image={'http://localhost:8080/files/0f33ee79-2365-4d53-ba50-5dcb8d227a4c'}
+                    // image={props.offer['link']}
                     title="Title"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Title
+                        {props.offer['title']}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Opis opis opis opis opis opis opis opis opis opis opis opis opis
+                        {props.offer['description']}
                     </Typography>
                 </CardContent>
             </CardActionArea>

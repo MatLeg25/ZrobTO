@@ -27,12 +27,12 @@ const AllOffers = () => {
 
         // uncomment to show offers as smiple html paragraphs at the top of the page
 
-        // return (
-        //     // <div key={index}>
-        //     //     <h1>{offer.title}</h1>
-        //     //     <p>{offer.description}</p>
-        //     // </div>
-        // )
+        return (
+            <div key={index}>
+                <h1>{offer.title}</h1>
+                <p>{offer.description}</p>
+            </div>
+        )
     })
 }
 
@@ -75,9 +75,9 @@ class Offers extends React.Component {
                         <Grid container>
                             <Grid item xs={1} xm={2}/>
                             <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-                                <Grid item xl={3}> <BigCard/> </Grid>
-                                <Grid item xl={3}> <BigCard/> </Grid>
-                                <Grid item xl={3}> <BigCard/> </Grid>
+                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
+                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
+                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
                             </Grid>
                         </Grid>
                     </Grid>
