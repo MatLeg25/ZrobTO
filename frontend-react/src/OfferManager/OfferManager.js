@@ -11,8 +11,7 @@ class OfferManager extends React.Component {
     this.state = {
       show:false,
       offers : [],
-      offersTEST : [{id: 'ID', title:'TITLE',description:'DESCRIPTION', price:'PRICE', date:'DATE'} ,{id: -1, title:'test',description:'Test description', price:22, date:'22-12-2233'} ],
-    }
+      }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getAllOfers = this.getAllOfers.bind(this);
   }
@@ -58,13 +57,15 @@ class OfferManager extends React.Component {
       title: data.get("title"),
       description: data.get("description"),
       price: data.get("price"),
-      delivery_time: data.get("delivery_time"),
+      delivery_time: data.get("delivery-time"),
       revisions: data.get("revisions"),
       date: data.get("date"),
       category: data.get("category"),
-      tmpID: "", //data.get("file"), ID set bewlo with ID given from server
-      subcategory_id: data.get("subcategory_id")
+      tmpID: "", //data.get("file"), ID set below with ID given from server
+      subcategory_id: 10//data.get("subcategory-id")
     }
+
+    console.log(newOffer)
 
     this.setState({
       offers: [...this.state.offers, newOffer] //add new offer to state in the last position

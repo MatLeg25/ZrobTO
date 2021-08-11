@@ -19,7 +19,7 @@ public class AddNewOfferController {
     private final FileService fileService;
     private final OfferService offerService;
 
-    public AddNewOfferController(FileService fileService, FileRepository fileRepository, OfferService offerService) {
+    public AddNewOfferController(FileService fileService, OfferService offerService) {
         this.fileService = fileService;
         this.offerService = offerService;
     }

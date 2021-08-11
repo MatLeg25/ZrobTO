@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.OfferDto;
 import com.example.demo.model.Offer;
 import com.example.demo.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -21,13 +21,13 @@ public class OfferController {
     }
 
     @GetMapping("/offer")
-    public List<Offer> get() {
+    public List<OfferDto> get() {
         //System.out.println("LOG => GET all");
         return offerService.getAllOffers();
     }
 
     @GetMapping("/offer/{id}")
-    public Optional<Offer> getById(@PathVariable("id") UUID id) {
+    public OfferDto getById(@PathVariable("id") UUID id) {
         System.out.println("LOG => GET aby ID: "+id);
         return offerService.getOfferById(id);
     }
