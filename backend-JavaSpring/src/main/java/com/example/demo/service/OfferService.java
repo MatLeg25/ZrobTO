@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.OfferDto;
+import com.example.demo.mapper.OfferMapper;
 import com.example.demo.model.Offer;
 import com.example.demo.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +10,31 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
 
     private final OfferRepository offerRepository;
+    private final OfferMapper offerMapper;
 
     @Autowired
-    public OfferService(OfferRepository offerRepository) {
-
+    public OfferService(OfferRepository offerRepository, OfferMapper offerMapper) {
         this.offerRepository = offerRepository;
+        this.offerMapper = offerMapper;
     }
 
-    public List<Offer> getAllOffers() {
-        return offerRepository.findAll();
+    public List<OfferDto> getAllOffers() {
+        return offerRepository.findAll().stream()
+                .map(offerMapper::map).collect(Collectors.toList());
     }
 
-    public Optional<Offer> getOfferById(UUID id) {
-        System.out.println("Requested ID: "+id);
-        return this.offerRepository.findById(id);
+    public OfferDto getOfferById(UUID id) {
+        Optional<Offer> offer = this.offerRepository.findById(id);
+        if (offer.isPresent()) {
+            return offerMapper.map(offer.get());
+        }
+        return null;
     }
 
     public void postOffer(Offer offer) {

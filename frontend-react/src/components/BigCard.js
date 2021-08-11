@@ -30,9 +30,7 @@ export default function MediaCard(props) {
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={'http://localhost:8080/files/0f33ee79-2365-4d53-ba50-5dcb8d227a4c'}
-                    // image={props.offer['link']}
-                    title="Title"
+                    image={props.offer['fileUrl']}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -47,7 +45,7 @@ export default function MediaCard(props) {
                 <Button size="small" color="primary">
                     Add to favourites
                 </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary"  href={"offer/" + props.offer['id']}>
                     Show details
                 </Button>
             </CardActions>

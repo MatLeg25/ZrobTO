@@ -6,43 +6,35 @@ import axios from "axios";
 
 import NavbarZT from "../../Navbar/NavbarZT";
 import BigCard from "../BigCard";
-
-
-const AllOffers = () => {
-
-    const [allOffers, setOffers] = useState([]);
-
-    const fetchOffers = () => {
-        axios.get("http://localhost:8080/offer").then(res => {
-            console.log(res);
-            setOffers(res.data);
-        })
-    }
-
-    useEffect(() => {
-        fetchOffers()
-    }, []);
-
-    return allOffers.map((offer, index) => {
-
-        // uncomment to show offers as smiple html paragraphs at the top of the page
-
-        return (
-            <div key={index}>
-                <h1>{offer.title}</h1>
-                <p>{offer.description}</p>
-            </div>
-        )
-    })
-}
+import DisplayOffers from "../../OfferManager/DisplayOffers"
 
 
 class Offers extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+          offers : [],
+          }
+        this.getAllOffers = this.getAllOffers.bind(this);
+      }
+
+    componentDidMount() {
+        this.getAllOffers(); //load initial value from DB
+      }
+
+    getAllOffers() {
+        axios.get('http://localhost:8080/offer')
+        .then(response => response.data)
+        .then(data => {
+           this.setState({ offers: data });
+          console.log(data);
+      });
+    }
+
 
     display() {
         return (
             <div>
-                <AllOffers/>
                 <div>
                     <NavbarZT/>
                 </div>
@@ -75,9 +67,7 @@ class Offers extends React.Component {
                         <Grid container>
                             <Grid item xs={1} xm={2}/>
                             <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
-                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
-                                {/*<Grid item xl={3}> <BigCard/> </Grid>*/}
+                                 <DisplayOffers data={this.state.offers} /> 
                             </Grid>
                         </Grid>
                     </Grid>

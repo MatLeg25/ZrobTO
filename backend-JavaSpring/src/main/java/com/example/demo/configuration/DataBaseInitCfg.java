@@ -97,11 +97,7 @@ public class DataBaseInitCfg {
         List<Category> categories = new ArrayList<>();
         CATEGORIES.forEach((category) -> categories.add(new Category(category,'X')));
         categories.forEach((this.categoryRepository::save));
-
-        //PYTANIA NA KONSULTACJE:
-        // 1. Relacja one-to-many (obiekt-do-listaObiektów) || czy da się tak jak na schemacie DB: id(int) - category_id(int)
-        // 2. nasza implementacja: autokonfigurator, one-to-many
-        categories.forEach((category) -> System.out.println(category));
+        //categories.forEach((category) -> System.out.println(category));
     }
 
     private void addSubcategories() {

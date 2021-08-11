@@ -2,12 +2,13 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import LandingPage from "./LandingPage";
 import Offers from "./components/pages/Offers"
+import OfferDetails from "./components/pages/OfferDetails"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
 //Routing
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import SubCategoryPage from './SubCategoryPage';
+import SubCategoryPage from './components/pages/SubCategoryPage';
 import NotFound from './NotFound';
 import OfferManager from './OfferManager/OfferManager'
 
@@ -29,6 +30,7 @@ const App = () => (
           <Switch>
             <Route path='/home'><LandingPage /></Route> 
             <Route path='/category/:catID/subCategory/:subCatID?'> <SubCategoryPage /></Route>
+            <Route path='/offer/:offerID'> <OfferDetails /></Route>
             <Route path='/offerManager'><OfferManager /></Route>
             <Route path="/offers"><Offers/></Route>
             <Route path="/*"><NotFound /></Route>
