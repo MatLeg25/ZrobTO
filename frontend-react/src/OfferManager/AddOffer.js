@@ -6,14 +6,42 @@ import axios from "axios";
 class AddOffer extends React.Component {
   constructor() {
     super();
-    //this.getAllOfers();
     this.state = {
+      category_id: 1,
       show:false,
       offers : [],
+      subcategories : [],
       }
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.getAllOfers = this.getAllOfers.bind(this);
+    this.setCategory = this.setCategory.bind(this);
+    this.getAllSubcategories = this.getAllSubcategories.bind(this);
+    this.getAllOffers = this.getAllOffers.bind(this);
   }
+
+  componentDidMount() {
+    this.getAllOffers(); //load initial value from DB
+    this.getAllSubcategories(); //load initial value from DB
+  }
+
+
+  getAllOffers() {
+      axios.get('http://localhost:8080/offer')
+      .then(response => response.data)
+      .then(data => {
+         this.setState({ offers: data });
+        console.log(data);
+    });
+  }
+
+
+  getAllSubcategories() {
+    axios.get('http://localhost:8080/subcategory')
+    .then(response => response.data)
+    .then(data => {
+       this.setState({ subcategories: data });
+      console.log(data);
+  });
+}
 
 
   getCurrentDate() {
@@ -40,7 +68,7 @@ class AddOffer extends React.Component {
       date: data.get("date"),
       category: data.get("category"),
       tmpID: "", //data.get("file"), ID set below with ID given from server
-      subcategory_id: 10//data.get("subcategory-id")
+      subcategory_id: data.get("subcategory-id")
     }
 
     console.log(newOffer)
@@ -73,7 +101,6 @@ class AddOffer extends React.Component {
 
     console.log("Added new offer:  ");
     console.log(newOffer);
-  
   }
 
   postOffer(offer) {
@@ -93,8 +120,30 @@ class AddOffer extends React.Component {
   }
 
 
-displayForm() {
+  displaySelectSubcategory() {
+    let lista = [];
+    {this.state.subcategories.forEach(element => {
+      lista.push(
+                <option value={element.id} key={`subcategory_id=${element.id}`}>{element.name}</option> 
+                )
+          })
+    }
+      return (<div class="mb-3">
+                  <label htmlFor="subcategory" class="form-label">Select subategory</label>
+                    <select id="subcategory-id" name="subcategory-id">
+                      {lista}
+                    </select>
+              </div>);
+    
+      }
 
+  setCategory() {
+    this.setState({ category_id: this.state.subcategories[1].id });
+    this.displaySelectSubcategory()
+  }
+
+
+displayForm() {
     return (
       <form onSubmit={this.handleSubmit} >
 
@@ -129,7 +178,7 @@ displayForm() {
         </div>
         <div class="mb-3">
           <label htmlFor="category" class="form-label">Select Category</label>
-            <select id="category" name="category">
+            <select id="category" onChange={this.setCategory} name="category">
               <option value="Grafika i Design">Grafika i Design</option>
               <option value="Digital Marketing">Digital Marketing</option>
               <option value="Foto i wideo">Foto i wideo</option>
@@ -137,12 +186,8 @@ displayForm() {
               <option value="Pozostałe">Pozostałe</option>
             </select>
         </div>
-        <div class="mb-3">
-        <label htmlFor="subcategory" class="form-label">Select subategory</label>
-            <select id="subcategory" name="subcategory">
-              <option value="subcat">Subcaregories</option>
-            </select>
-        </div>
+
+        {this.displaySelectSubcategory()}
 
         <div class="mb-3">
           <label htmlFor="file" class="form-label">Image</label>

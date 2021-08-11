@@ -32,7 +32,7 @@ public class Subcategory {
     private Category category;
 
     @OneToMany(mappedBy="subcategory", fetch= FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Offer> offers;
 
 
