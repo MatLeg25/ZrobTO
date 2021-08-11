@@ -22,14 +22,16 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public void save(MultipartFile file) throws IOException {
+    public String save(MultipartFile file) throws IOException {
         FileEntity fileEntity = new FileEntity();
         fileEntity.setName(StringUtils.cleanPath(file.getOriginalFilename()));
         fileEntity.setContentType(file.getContentType());
         fileEntity.setData(file.getBytes());
         fileEntity.setSize(file.getSize());
 
-        fileRepository.save(fileEntity);
+        fileEntity = fileRepository.saveAndFlush(fileEntity);
+        return fileEntity.getId();
+
     }
 
     public Optional<FileEntity> getFile(String id) {

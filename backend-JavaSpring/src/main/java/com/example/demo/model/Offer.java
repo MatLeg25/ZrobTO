@@ -29,6 +29,9 @@ public class Offer {
     private int deliveryTime;
     private int revisions;
 
+    @Transient
+    private String tmpID;
+
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "file_id")
     @JsonBackReference

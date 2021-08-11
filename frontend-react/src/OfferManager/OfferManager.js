@@ -26,7 +26,6 @@ class OfferManager extends React.Component {
   getAllOfers() {
       axios.get('http://localhost:8080/offer')
       .then(response => response.data)
-     // .then(data => JSON.stringify(data))
       .then(data => {
          this.setState({ offers: data });
         console.log(data);
@@ -63,90 +62,50 @@ class OfferManager extends React.Component {
       revisions: data.get("revisions"),
       date: data.get("date"),
       category: data.get("category"),
-      //file_id: data.get("file"),
+      tmpID: "", //data.get("file"), ID set bewlo with ID given from server
       subcategory_id: data.get("subcategory_id")
     }
 
-    console.log(newOffer)
-
-        //add new offer to state in the last position
     this.setState({
-      offers: [...this.state.offers, newOffer]
+      offers: [...this.state.offers, newOffer] //add new offer to state in the last position
     })
 
-    ///////////////////////////////////////////////////////////////upload FILE
-//     let formData = new FormData();
-//     formData.append("file", data.get("file"));
-  
-//     fetch('http://localhost:8080/files', {
-//         method: 'POST', 
-// //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
-//         body: formData,
-//       })
-//       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
-//       .then(data => {
-//         console.log('Success:', data);
-//       })
-//       .catch((error) => {
-//         console.error('Error:', error);
-//       });
-
-//     //////////////////////////////////////////////////////////////////////////////////////
-
-//     console.log("Added new offer:  " + newOffer);
-  
-//     //add new offer to state in the last position
-//     this.setState({
-//       offers: [...this.state.offers, newOffer]
-//     })
-
-//     fetch('http://localhost:8080/offer', {
-//         method: 'POST', 
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(newOffer),
-//       })
-//       // .then(response => response.json())
-//       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
-//       .then(data => {
-//         console.log('Success:', data);
-//       })
-//       .catch((error) => {
-//         console.error('Error:', error);
-//       });
-
-      ///////////////////TEST post offer and image
+      ///////////////////Post offer and image
     let formData = new FormData();
     formData.append("file", data.get("file"));
   
-    fetch('http://localhost:8080/offer1', {
+    fetch('http://localhost:8080/add-offer-file', {
         method: 'POST', 
 //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
         body: formData,
       })
-      .then(() => { this.postOffer(newOffer)}) // POST OFFER
-      .then(() => { this.getAllOfers()}) // reload from DB after add new offer
-      .then(data => {
-        console.log('Success:', data);
-      })
+        //take response frome server (IMG ID) and set to file_id in newOffer
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(data) {
+          console.log('Success:', data); // this will be a string
+          newOffer.tmpID = data;
+        })
+        .then(() => { this.postOffer(newOffer)}) // POST OFFER
+        .then(() => { this.getAllOfers()}) // reload from DB after add new offer
       .catch((error) => {
         console.error('Error:', error);
       });
 
-    console.log("Added new offer:  " + newOffer);
+    console.log("Added new offer:  ");
+    console.log(newOffer);
   
   }
 
   postOffer(offer) {
-    fetch('http://localhost:8080/offer2', {
+    fetch('http://localhost:8080/add-offer2', {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(offer),
       })
-      // .then(response => response.json())
       .then(() => { this.getAllOfers()}) // reload from DB after add new offer
       .then(data => {
         console.log('Success:', data);
@@ -210,12 +169,6 @@ class OfferManager extends React.Component {
   }
 
 
-
-  startOfferManager() {
-      alert("OK")
-  }
-
-
   displayForm() {
 
     return (
@@ -261,8 +214,10 @@ class OfferManager extends React.Component {
             </select>
         </div>
         <div class="mb-3">
-          <label htmlFor="subcategory" class="form-label">Subcategory</label>
-          <input type="text" id="subcategory" name="subcategory" class="form-control" placeholder="Select subcategory"/>
+        <label htmlFor="subcategory" class="form-label">Select subategory</label>
+            <select id="subcategory" name="subcategory">
+              <option value="subcat">Subcaregories</option>
+            </select>
         </div>
 
         <div class="mb-3">
