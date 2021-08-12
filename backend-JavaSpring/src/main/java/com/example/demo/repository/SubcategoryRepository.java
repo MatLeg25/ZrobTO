@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 @Transactional
-public interface SubcategoryRepository extends JpaRepository<Subcategory, UUID> {
+public interface SubcategoryRepository extends JpaRepository<Subcategory, Integer> {
 }

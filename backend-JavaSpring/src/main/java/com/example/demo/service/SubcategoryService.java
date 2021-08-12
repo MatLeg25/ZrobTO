@@ -23,8 +23,7 @@ public class SubcategoryService {
         return subcategoryRepository.findAll();
     }
 
-    public Subcategory getSubcategoryById(UUID id) {
-        System.out.println("Requested ID: "+id);
+    public Subcategory getSubcategoryById(int id) {
         return this.subcategoryRepository.getById(id);
     }
 

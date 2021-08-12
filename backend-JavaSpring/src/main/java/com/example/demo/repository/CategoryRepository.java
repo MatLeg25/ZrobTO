@@ -6,12 +6,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-@Transactional
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-    List<Category> findCategoryByNameStartingWith(String name);
-
+//    List<Category> findCategoryByNameStartingWith(String name);
 
 }

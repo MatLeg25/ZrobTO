@@ -43,4 +43,5 @@ public class FileEntity {
     @OneToMany(mappedBy="fileEntity", fetch= FetchType.LAZY)
     @JsonManagedReference
     private List<Offer> offers;
+
 }

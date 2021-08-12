@@ -22,13 +22,11 @@ public class OfferController {
 
     @GetMapping("/offer")
     public List<OfferDto> get() {
-        //System.out.println("LOG => GET all");
         return offerService.getAllOffers();
     }
 
     @GetMapping("/offer/{id}")
     public OfferDto getById(@PathVariable("id") UUID id) {
-        System.out.println("LOG => GET aby ID: "+id);
         return offerService.getOfferById(id);
     }
 

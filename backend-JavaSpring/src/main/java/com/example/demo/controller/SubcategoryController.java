@@ -22,13 +22,11 @@ public class SubcategoryController {
 
     @GetMapping("/subcategory")
     public List<Subcategory> get() {
-        //System.out.println("LOG => GET all");
         return subcategoryService.getAllSubcategories();
     }
 
     @GetMapping("/subcategory/{id}")
-    public Subcategory getById(@PathVariable("id") UUID id) {
-        System.out.println("LOG => GET aby ID: " + id);
+    public Subcategory getById(@PathVariable("id") int id) {
         return subcategoryService.getSubcategoryById(id);
     }
 }

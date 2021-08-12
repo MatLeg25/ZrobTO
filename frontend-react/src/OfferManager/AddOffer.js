@@ -67,8 +67,8 @@ class AddOffer extends React.Component {
       revisions: data.get("revisions"),
       date: data.get("date"),
       category: data.get("category"),
-      tmpID: "", //data.get("file"), ID set below with ID given from server
-      subcategory_id: data.get("subcategory-id")
+      fileID: "", //data.get("file"), ID set below with ID given from server
+      subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
     }
 
     console.log(newOffer)
@@ -92,7 +92,7 @@ class AddOffer extends React.Component {
         })
         .then(function(data) {
           console.log('Success:', data); // this will be a string
-          newOffer.tmpID = data;
+          newOffer.fileID = data;
         })
         .then(() => { this.postOffer(newOffer)}) // POST OFFER
       .catch((error) => {
@@ -124,7 +124,7 @@ class AddOffer extends React.Component {
     let lista = [];
     {this.state.subcategories.forEach(element => {
       lista.push(
-                <option value={element.id} key={`subcategory_id=${element.id}`}>{element.name}</option> 
+                <option value={element.id} key={`subcategoryID=${element.id}`}>{element.name}</option> 
                 )
           })
     }

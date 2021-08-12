@@ -22,7 +22,6 @@ public class CategoryService {
     }
 
     public Category getCategoryById(int id) {
-        System.out.println("Requested ID: "+id);
         return this.categoryRepository.getById(id);
     }
 }
