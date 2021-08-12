@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
-import Grid from '@material-ui/core/Grid';
 
 export default function OfferDetails() {
   // We can use the `useParams` hook here to access the dynamic pieces of the URL.
@@ -41,7 +40,7 @@ export default function OfferDetails() {
         <h5>Price= {offer.price}</h5>
         <h5>Delivery time= {offer.deliveryTime}</h5>
         <h5>Revisions= {offer.revisions}</h5>
-        <h5><img src={offer.fileUrl} /></h5>
+        <h5><img alt={'No image found'} src={offer.fileUrl} /></h5>
         <h5>SubcategoryID= {offer.subcategory_id}</h5>
         <h5>Subcategory= {offer.subcategoryName}</h5>
       </div>

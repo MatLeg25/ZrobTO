@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 
-import NavbarZT from "../../Navbar/NavbarZT";
-import BigCard from "../BigCard";
-import DisplayOffers from "../../OfferManager/DisplayOffers"
+import NavbarZT from "../navbar/NavbarZT";
+import DisplayOffers from "../offerManager/DisplayOffers"
 
 
 class Offers extends React.Component {
