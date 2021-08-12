@@ -7,40 +7,50 @@ class AddOffer extends React.Component {
   constructor() {
     super();
     this.state = {
-      category_id: 1,
       show:false,
       offers : [],
       subcategories : [],
+      categories : [],
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setCategory = this.setCategory.bind(this);
-    this.getAllSubcategories = this.getAllSubcategories.bind(this);
+    this.getAllCategories = this.getAllCategories.bind(this);
+    this.getSubcategories = this.getSubcategories.bind(this);
     this.getAllOffers = this.getAllOffers.bind(this);
   }
 
   componentDidMount() {
     this.getAllOffers(); //load initial value from DB
-    this.getAllSubcategories(); //load initial value from DB
+    this.getSubcategories(); //load initial value from DB
+    this.getAllCategories(); //load initial value from DB
   }
-
 
   getAllOffers() {
       axios.get('http://localhost:8080/offer')
       .then(response => response.data)
       .then(data => {
          this.setState({ offers: data });
-        console.log(data);
+        //console.log(data);
     });
   }
 
-
-  getAllSubcategories() {
-    axios.get('http://localhost:8080/subcategory')
+  getAllCategories() {
+    axios.get('http://localhost:8080/category')
     .then(response => response.data)
     .then(data => {
-       this.setState({ subcategories: data });
-      console.log(data);
+       this.setState({ categories: data });
+      //console.log(data);
   });
+}
+
+getSubcategories(categoryId = 1) {
+//     axios.get('http://localhost:8080/subcategory') //getAllSubcategories
+  axios.get('http://localhost:8080/subcategory/category?categoryId='+categoryId)
+  .then(response => response.data)
+  .then(data => {
+     this.setState({ subcategories: data });
+     //console.log(data);
+});
 }
 
 
@@ -71,7 +81,7 @@ class AddOffer extends React.Component {
       subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
     }
 
-    console.log(newOffer)
+    //console.log(newOffer)
 
     this.setState({
       offers: [...this.state.offers, newOffer] //add new offer to state in the last position
@@ -120,27 +130,46 @@ class AddOffer extends React.Component {
   }
 
 
+  displaySelectCategory() {
+    let categoryList = [];
+    {this.state.categories.forEach(element => {
+      categoryList.push(
+                <option value={element.id} key={`categoryID=${element.id}`}>{element.name}</option> 
+                )
+          })
+    }
+      return (<div class="mb-3">
+                  <label htmlFor="category" class="form-label">Select category</label>
+                    <select id="category-id" name="category-id" onChange={this.setCategory}>
+                      {categoryList}
+                    </select>
+              </div>);
+      }
+
+
+  setCategory(event) {
+      event.preventDefault(); //prevent page refresh
+      this.getSubcategories(event.target.value);
+      }
+
+
   displaySelectSubcategory() {
-    let lista = [];
+    let subcategoryList = [];
     {this.state.subcategories.forEach(element => {
-      lista.push(
+      subcategoryList.push(
                 <option value={element.id} key={`subcategoryID=${element.id}`}>{element.name}</option> 
                 )
           })
     }
       return (<div class="mb-3">
-                  <label htmlFor="subcategory" class="form-label">Select subategory</label>
-                    <select id="subcategory-id" name="subcategory-id">
-                      {lista}
+                  <label htmlFor="subcategory" class="form-label">Select subcategory</label>
+                    <select id="subcategory-id" name="subcategory-id" >
+                      {subcategoryList}
                     </select>
               </div>);
     
       }
 
-  setCategory() {
-    this.setState({ category_id: this.state.subcategories[1].id });
-    this.displaySelectSubcategory()
-  }
 
 
 displayForm() {
@@ -176,16 +205,8 @@ displayForm() {
           <label htmlFor="price" class="form-label">Price</label>
           <input type="text" id="price" name="price" class="form-control" placeholder="Enter price"/>
         </div>
-        <div class="mb-3">
-          <label htmlFor="category" class="form-label">Select Category</label>
-            <select id="category" onChange={this.setCategory} name="category">
-              <option value="Grafika i Design">Grafika i Design</option>
-              <option value="Digital Marketing">Digital Marketing</option>
-              <option value="Foto i wideo">Foto i wideo</option>
-              <option value="Programowanie">Programowanie</option>
-              <option value="Pozostałe">Pozostałe</option>
-            </select>
-        </div>
+
+        {this.displaySelectCategory()}
 
         {this.displaySelectSubcategory()}
 

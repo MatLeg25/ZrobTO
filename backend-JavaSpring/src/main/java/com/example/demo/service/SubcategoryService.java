@@ -27,4 +27,7 @@ public class SubcategoryService {
         return this.subcategoryRepository.getById(id);
     }
 
+    public List<Subcategory> getSubcategoryByCategoryId(int categoryId) {
+        return this.subcategoryRepository.findAllByCategory_Id(categoryId);
+    }
 }

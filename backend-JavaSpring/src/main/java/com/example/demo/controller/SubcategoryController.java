@@ -25,9 +25,15 @@ public class SubcategoryController {
         return subcategoryService.getAllSubcategories();
     }
 
-    @GetMapping("/subcategory/{id}")
+    @GetMapping("/subcategory/{id}") //http://localhost:8080/subcategory/7
     public Subcategory getById(@PathVariable("id") int id) {
         return subcategoryService.getSubcategoryById(id);
     }
+
+    @GetMapping("/subcategory/category") //http://localhost:8080/subcategory/category?categoryId=1
+    public List<Subcategory> getByCategoryId(@RequestParam("categoryId") int categoryId) {
+        return subcategoryService.getSubcategoryByCategoryId(categoryId);
+    }
+
 }
 
