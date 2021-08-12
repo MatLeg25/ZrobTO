@@ -18,4 +18,5 @@ public class OfferDto {
     private int revisions;
     private String fileUrl;
     private int subcategory_Id;
+    private String subcategoryName;
 }

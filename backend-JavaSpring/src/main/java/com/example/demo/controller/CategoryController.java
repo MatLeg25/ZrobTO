@@ -21,13 +21,11 @@ public class CategoryController {
 
     @GetMapping("/category")
     public List<Category> get() {
-        //System.out.println("LOG => GET all");
         return categoryService.getAllCategories();
     }
 
     @GetMapping("/category/{id}")
     public Category getById(@PathVariable("id") int id) {
-        System.out.println("LOG => GET aby ID: " + id);
         return categoryService.getCategoryById(id);
     }
 }

@@ -22,7 +22,8 @@ export default function OfferDetails() {
                     deliveryTime: data.deliveryTime,
                     revisions: data.revisions,
                     fileUrl: data.fileUrl,
-                    subcategory_id: "null"
+                    subcategory_id: data.subcategory_Id,
+                    subcategoryName: data.subcategoryName,
                 })
             })
     }, []);
@@ -41,7 +42,8 @@ export default function OfferDetails() {
         <h5>Delivery time= {offer.deliveryTime}</h5>
         <h5>Revisions= {offer.revisions}</h5>
         <h5><img src={offer.fileUrl} /></h5>
-        <h5>Subcategory= {offer.subcategory_id}</h5>
+        <h5>SubcategoryID= {offer.subcategory_id}</h5>
+        <h5>Subcategory= {offer.subcategoryName}</h5>
       </div>
     );
   }

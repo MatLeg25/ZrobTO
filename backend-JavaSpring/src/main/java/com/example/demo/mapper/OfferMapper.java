@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 public class OfferMapper {
 
     private final String SERVER_FILE_URL = "http://localhost:8080/files/";
-//TODO rethink NULL value for file and subcategory
+    private final String DEFAULT_FILE_URL = "https://cdn.pixabay.com/photo/2017/01/08/13/58/cube-1963036__340.jpg";
+
     public OfferDto map(Offer offer) {
         return OfferDto.builder()
                 .id(offer.getId())
@@ -18,8 +19,35 @@ public class OfferMapper {
                 .price(offer.getPrice())
                 .deliveryTime(offer.getDeliveryTime())
                 .revisions(offer.getRevisions())
-                .fileUrl(SERVER_FILE_URL+offer.getFileEntity().getId())
-                //.subcategory_Id(offer.getSubcategory().getId())
+                .fileUrl(this.getFileUrl(offer))
+                .subcategory_Id(this.getSubcategoryId(offer))
+                .subcategoryName(this.getSubcategoryName(offer))
                 .build();
     }
+
+    private String getFileUrl(Offer offer) {
+        if (offer.getFileEntity() == null) {
+            return DEFAULT_FILE_URL;
+        } else {
+            return SERVER_FILE_URL+offer.getFileEntity().getId();
+        }
+    }
+
+    private int getSubcategoryId(Offer offer) {
+        if (offer.getSubcategory() == null) {
+            return -1;
+        } else {
+            return offer.getSubcategory().getId();
+        }
+    }
+
+
+    private String getSubcategoryName(Offer offer) {
+        if (offer.getSubcategory() == null) {
+            return "";
+        } else {
+            return offer.getSubcategory().getName();
+        }
+    }
+
 }

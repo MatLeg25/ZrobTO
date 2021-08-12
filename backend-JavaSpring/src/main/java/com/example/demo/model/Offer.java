@@ -30,7 +30,9 @@ public class Offer {
     private int revisions;
 
     @Transient
-    private String tmpID;
+    private String fileID;
+    @Transient
+    private int subcategoryID;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "file_id")

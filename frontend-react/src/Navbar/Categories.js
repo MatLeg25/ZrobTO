@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 import { borders } from '@material-ui/system';
+import axios from "axios";
 
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
@@ -59,6 +60,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+///////////////////////////getSubcategories from server TODO download by category ID
+function GetSubcategoryByCategoryID(categoryId) {
+  console.log("CategoryID= "+categoryId)
+  // const [subcategories, setSubcategories] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:8080/subcategory/category?categoryId='+categoryId+1)
+  //           .then(response => response.data)
+  //           .then(data => {
+  //               setSubcategories(data)
+  //               console.log("SUBCATEGORIES:")
+  //               console.log(data)
+  //           })
+  //   }, []);
+  //   return subcategories;
+}
+//////////////////////////////////////////////////////////////////////////
+
+
 
 export default function FullWidthTabs() {
   const classes = useStyles();
@@ -95,8 +114,7 @@ export default function FullWidthTabs() {
     <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
       );
 
-
-  function getSubCategories(categoryIndex) {
+  function getSubcategories(categoryIndex) {
 
     const numItemsPerRow = 3;
 
@@ -116,6 +134,8 @@ export default function FullWidthTabs() {
 
     let elem = [];
 
+   GetSubcategoryByCategoryID(categoryIndex);
+
     {allSubCats[categoryIndex].map((name, index) =>
       elem.push(
         <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={itemStyle}>{name}</Link>
@@ -134,7 +154,7 @@ export default function FullWidthTabs() {
             <Grid container spacing={6} direction="column" alignItems='center' alignItems="center">
 
               <Grid item xs={12} container spacing={3} direction="column" alignItems='center' justifyContent='center' minHeight="100vh" item="true">
-                    {getSubCategories(value)}
+                    {getSubcategories(value)}
               </Grid>
 
             </Grid>
