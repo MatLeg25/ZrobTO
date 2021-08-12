@@ -1,6 +1,6 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
-import LandingPage from "./LandingPage";
+import React from 'react';
+import LandingPage from "./components/pages/LandingPage";
 import Offers from "./components/pages/Offers"
 import OfferDetails from "./components/pages/OfferDetails"
 import {createTheme, ThemeProvider} from "@material-ui/core";
@@ -9,8 +9,8 @@ import {createTheme, ThemeProvider} from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import SubCategoryPage from './components/pages/SubCategoryPage';
-import NotFound from './NotFound';
-import OfferManager from './OfferManager/OfferManager'
+import NotFound from './components/pages/NotFound';
+import OfferManager from './components/pages/OfferManager'
 
 const theme = createTheme({
     palette: {

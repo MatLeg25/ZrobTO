@@ -1,13 +1,12 @@
-//import './App.css';
-import React, {Component, useState} from 'react';
+import React from 'react';
 import {Grid, Paper, Typography} from '@material-ui/core';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Image from "./resources/background.jpg"
+import Image from "../../resources/background.jpg"
 
 
-import NavbarZT from './Navbar/NavbarZT';
-import SmallCard from "./SmallCard";
+import NavbarZT from '../navbar/NavbarZT';
+import SmallCard from "../SmallCard";
 
 
 const styles = {
@@ -69,7 +68,7 @@ class LandingPage extends React.Component {
                     </Grid>
                     <Grid item/>
                     <Grid item style={{height: '5em'}}> </Grid>
-                    <Grid item xs={2}></Grid>
+                    <Grid item xs={2}/>
                     <Grid item container xs={12}>
                         <Grid item xs={0} sm={2}/>
                         <Grid container xs={12} sm={8} spacing={4} justify="space-evenly">

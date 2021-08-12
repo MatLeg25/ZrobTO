@@ -1,6 +1,5 @@
-//import './App.css';
-import React, {Component, useState} from 'react';  
-import BigCard from "../components/BigCard"
+import React from 'react';
+import BigCard from "../BigCard"
 import Grid from '@material-ui/core/Grid';
 
 export default function displayOffers(props) {

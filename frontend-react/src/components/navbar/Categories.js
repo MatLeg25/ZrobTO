@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import { borders } from '@material-ui/system';
-import axios from "axios";
 
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';

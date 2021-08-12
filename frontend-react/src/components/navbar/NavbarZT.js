@@ -7,12 +7,8 @@ import Box from '@material-ui/core/Box';
 import Container from 'react-bootstrap/Container'
 import {Link} from 'react-router-dom';
 
-  //<Box component="div" m={2} p={2} width={1}>  
-
 import Categories from './Categories';
-import logoImg from '../resources/logoV1.png';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-import Grid from "@material-ui/core/Grid";
+import logoImg from '../../resources/logoV1.png';
 
 class NavbarZT extends React.Component {
 

@@ -1,6 +1,4 @@
-import React, {Component, useState} from 'react';  
-import {Button, Modal} from 'react-bootstrap'
-import DisplayOffer from "./DisplayOffers"
+import React from 'react';
 import axios from "axios";
 
 class AddOffer extends React.Component {

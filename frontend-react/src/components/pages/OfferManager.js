@@ -1,14 +1,13 @@
-//import './App.css';
-import React, {Component, useState} from 'react';  
+import React from 'react';
 import {Button, Modal} from 'react-bootstrap'
-import DisplayOffers from "./DisplayOffers"
-import AddOffer from "./AddOffer"
+import DisplayOffers from "../offerManager/DisplayOffers"
+import AddOffer from "../offerManager/AddOffer"
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 
 class OfferManager extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show:false,
       offers : [],
@@ -88,11 +87,11 @@ class OfferManager extends React.Component {
                   <AddOffer />
       </Modal.Body>
       <Modal.Footer>
-        <button type="button" class="btn btn-dark" onClick={() => this.handleModal()}>Close Modal</button>
+        <button type="button" className="btn btn-dark" onClick={() => this.handleModal()}>Close Modal</button>
       </Modal.Footer>
       </Modal>
 
-      <button type="button" class="btn btn-light"  onClick={this.getAllOffers}>Refresh</button>
+      <button type="button" className="btn btn-light"  onClick={this.getAllOffers}>Refresh</button>
 
     </div>)
 }
