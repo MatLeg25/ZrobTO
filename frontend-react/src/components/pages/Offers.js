@@ -5,29 +5,30 @@ import axios from "axios";
 
 
 import NavbarZT from "../navbar/NavbarZT";
-import DisplayOffers from "../offerManager/DisplayOffers"
+import DisplayOffers from "../offerManager/DisplayOffers";
+import FilterPrice from "../FilterPrice"
 
 
 class Offers extends React.Component {
     constructor() {
         super();
         this.state = {
-          offers : [],
-          }
+            offers: [],
+        }
         this.getAllOffers = this.getAllOffers.bind(this);
-      }
+    }
 
     componentDidMount() {
         this.getAllOffers(); //load initial value from DB
-      }
+    }
 
     getAllOffers() {
         axios.get('http://localhost:8080/offer')
-        .then(response => response.data)
-        .then(data => {
-           this.setState({ offers: data });
-          console.log(data);
-      });
+            .then(response => response.data)
+            .then(data => {
+                this.setState({offers: data});
+                console.log(data);
+            });
     }
 
 
@@ -61,12 +62,18 @@ class Offers extends React.Component {
                                 <Grid item xl={2}><Button variant="outlined" color="primary" size="small">Pokaż
                                     wszystkie</Button></Grid>
                             </Grid>
+                            <Grid container>
+                                <Grid item xs={1} xm={2}/>
+                                <Grid item xs={10} xm={8} container spacing={1}>
+                                    <FilterPrice/>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={12}/>
                         <Grid container>
                             <Grid item xs={1} xm={2}/>
                             <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-                                 <DisplayOffers data={this.state.offers} /> 
+                                <DisplayOffers data={this.state.offers}/>
                             </Grid>
                         </Grid>
                     </Grid>
