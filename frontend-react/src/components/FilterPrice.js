@@ -5,6 +5,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -19,17 +20,38 @@ const useStyles = makeStyles((theme) => ({
 export default function NativeSelects() {
     const classes = useStyles();
     const [state, setState] = React.useState({
-        minPrice: '',
-        maxPrice:'',
+        offers: [],
+        minPrice: 0,
+        maxPrice: 1000000,
     });
 
     const handleChange = (event) => {
+        // const name = event.target.name;
+        // console.log(name)
+
         const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
-        console.log(event.target.value)
+
+        if (name === "minPrice") {
+            setState({
+                minPrice: event.target.value,
+                maxPrice: state.maxPrice
+            });
+        } else {
+            setState({
+                maxPrice: event.target.value,
+                minPrice: state.minPrice
+            })
+        }
+        console.log(state.minPrice)
+        console.log(state.maxPrice)
+
+
+        axios.get('http://localhost:8080/offer/price?minPrice='+ state.minPrice +'&maxPrice=' + state.maxPrice)
+                .then(response => response.data)
+                .then(data => {
+                    console.log(data)
+                    // setState({offers: [data]});
+                });
     };
 
     return (
@@ -70,6 +92,9 @@ export default function NativeSelects() {
                     <option value={300}>300</option>
                 </Select>
             </FormControl>
+            <h3>{state.minPrice}</h3>
+            <h3>{state.maxPrice}</h3>
+            <h3>{state.offers}</h3>
 
         </div>
     );
