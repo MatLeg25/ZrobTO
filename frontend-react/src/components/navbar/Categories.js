@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import {useParams} from 'react-router-dom';
+import axios from "axios";
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
@@ -57,65 +58,55 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-///////////////////////////getSubcategories from server TODO download by category ID
-function GetSubcategoryByCategoryID(categoryId) {
-  console.log("CategoryID= "+categoryId)
-  // const [subcategories, setSubcategories] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:8080/subcategory/category?categoryId='+categoryId+1)
-  //           .then(response => response.data)
-  //           .then(data => {
-  //               setSubcategories(data)
-  //               console.log("SUBCATEGORIES:")
-  //               console.log(data)
-  //           })
-  //   }, []);
-  //   return subcategories;
-}
 //////////////////////////////////////////////////////////////////////////
-
-
 
 export default function FullWidthTabs() {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
+  const [subcategories, setSubcategories] = React.useState([]);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+
+    axios.get('http://localhost:8080/subcategory/category?categoryId='+(newValue+1))
+      .then(response => response.data)
+      .then(data => {
+          setSubcategories(data)
+    })
+  }
+
 
   const handleChangeIndex = (index) => {
     setValue(index);
   };
 
-  ///////////////////////////////////
   //TODO: rethink data format for category: [name<=>icon<=>subcats]
   const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie", "Pozostałe"];
   const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />, <PagesIcon />];
-  const subCategories = [             
-      ["Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki"],
-      ["Web i App Design","Web Design","App Design","Landing Page Design","UX Design","Design Banerów","Design ikon"],
-      ["Design druku","Ulotki","Broszury","Plakaty","Katalogi","Menu","Zaproszenia"],
-      []
-  ];
-  const subCategories0 = [             
-      "SubCatTitle1","SubCat1a","SubCat1b","SubCat1c",
-      "SubCatTitle2","SubCat2a","SubCat2b","SubCat2c","SubCat2d",
-      "SubCatTitle3","SubCat3a","SubCat3b","SubCat3c",
-  ];
 
-  const allSubCats = [subCategories0, subCategories0,subCategories0, subCategories0, subCategories0]
 
   const categoryNameTAB = categoriesName.map((name, index) =>
     <Tab label={name} {...a11yProps({index})} icon={categoriesIcon[index]} key={"categoryName-"+index}/>
-      );
+  );
+
+    // passing an empty array as second argument triggers the callback in useEffect
+    // only after the initial render thus replicating `componentDidMount` lifecycle behaviour
+  useEffect(() => {
+    axios.get('http://localhost:8080/subcategory/category?categoryId='+2)
+      .then(response => response.data)
+      .then(data => {
+          setSubcategories(data)
+      })
+  }, []);
+
+
 
   function getSubcategories(categoryIndex) {
+    categoryIndex=categoryIndex+1; //in DB catgory starts with ID=1
 
     const numItemsPerRow = 3;
-
     const containerStyle = { 
       display: "flex", 
       width: "100%", 
@@ -130,24 +121,24 @@ export default function FullWidthTabs() {
       color: "teal"
     };
 
-    let elem = [];
+  
+    let subcategoriesList = [];
 
-   GetSubcategoryByCategoryID(categoryIndex);
-
-    {allSubCats[categoryIndex].map((name, index) =>
-      elem.push(
-        <Link to={'category/'+categoryIndex+'/subCategory/'+index} style={itemStyle}>{name}</Link>
+    {subcategories.map((subcategory) =>
+      subcategoriesList.push(
+        <Link to={'category/'+categoryIndex+'/subCategory/'+subcategory.id} style={itemStyle}>{subcategory.name}</Link>
       )
     )}
-    
-    return <Grid item xs={12} style={containerStyle}>{elem}</Grid>
+
+    return <Grid item xs={12} style={containerStyle}>{subcategoriesList}</Grid>
   }
 
 
+
   function getCategoriesTABPanel() {
-    const elems =[];
+    const categoriesList =[];
     for(let CatIndex=0;CatIndex<categoriesName.length;CatIndex++) {
-          elems.push(
+      categoriesList.push(
           <TabPanel value={value} index={CatIndex} dir={theme.direction}>
             <Grid container spacing={6} direction="column" alignItems='center' alignItems="center">
 
@@ -159,11 +150,11 @@ export default function FullWidthTabs() {
           </TabPanel>
         )
     }
-    return elems;
+    return categoriesList;
 
   }
 
-  /////////////////////////////////////
+
 
   return (
     // style={{  position: 'absolute',top: '1vw',right: '-3vw', border: '1px solid #e0e0e0'}}
@@ -183,10 +174,7 @@ export default function FullWidthTabs() {
         
         </Tabs>
       </AppBar>
-
-      {getCategoriesTABPanel()}
-
- 
+        {getCategoriesTABPanel()}
     </div>
   );
 }
