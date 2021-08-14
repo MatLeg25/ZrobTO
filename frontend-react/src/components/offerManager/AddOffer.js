@@ -172,6 +172,7 @@ getSubcategories(categoryId = 1) {
 
 displayForm() {
     return (
+      
       <form onSubmit={this.handleSubmit} >
 
         <div class="mb-3">
@@ -193,11 +194,11 @@ displayForm() {
         </div>
         <div class="mb-3">
           <label htmlFor="delivery-time" class="form-label">Delivery time</label>
-          <input type="number" min="0" id="delivery-time" name="delivery-time" class="form-control" placeholder="Enter delivery time"/>
+          <input type="number" min="0" id="delivery-time" name="delivery-time" class="form-control" placeholder="Enter delivery time (days)"/>
         </div>
         <div class="mb-3">
           <label htmlFor="revisions" class="form-label">Revisions</label>
-          <input type="number" min="0" id="revisions" name="revisions" class="form-control" placeholder="Enter delivery time (days)"/>
+          <input type="number" min="0" id="revisions" name="revisions" class="form-control" placeholder="Enter revisions number"/>
         </div>
         <div class="mb-3">
           <label htmlFor="price" class="form-label">Price</label>

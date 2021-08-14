@@ -3,6 +3,7 @@ import React from 'react';
 import LandingPage from "./components/pages/LandingPage";
 import Offers from "./components/pages/Offers"
 import OfferDetails from "./components/pages/OfferDetails"
+import OfferUpdate from "./components/pages/OfferUpdate"
 import {createTheme, ThemeProvider} from "@material-ui/core";
 
 //Routing
@@ -31,6 +32,7 @@ const App = () => (
             <Route path='/home'><LandingPage /></Route> 
             <Route path='/category/:catID/subCategory/:subCatID?'> <SubCategoryPage /></Route>
             <Route path='/offer/:offerID'> <OfferDetails /></Route>
+            <Route path='/offer-update/:offerID'> <OfferUpdate /></Route>
             <Route path='/offerManager'><OfferManager /></Route>
             <Route path="/offers"><Offers/></Route>
             <Route path="/*"><NotFound /></Route>

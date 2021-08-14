@@ -110,7 +110,7 @@ handleModal() {
         {this.displayModal()}
         <br /><hr /><br />
         <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-        <DisplayOffers data={this.state.offers} />
+        <DisplayOffers data={this.state.offers} option={true} />
         </Grid>
       </div>
 
