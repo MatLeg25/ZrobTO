@@ -37,11 +37,11 @@ public class OfferController {
 //        offerService.postOffer(offer);
 //    }
 
-    @PutMapping("/offer")
-    public void put(@RequestBody Offer offer) {
-        System.out.println("LOG => From Put: "+ offer.toString());
-        offerService.updateOffer(offer);
-    }
+//    @PutMapping("/offer")
+//    public void put(@RequestBody Offer offer) {
+//        System.out.println("LOG => From Put: "+ offer.toString());
+//        offerService.updateOffer(offer);
+//    }
 
     @DeleteMapping("/offer")
     public void delete(@RequestParam(name = "id") UUID id) {

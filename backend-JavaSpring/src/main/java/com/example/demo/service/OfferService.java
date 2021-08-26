@@ -46,6 +46,9 @@ public class OfferService {
         offerToUpdate.setTitle(offer.getTitle());
         offerToUpdate.setDescription(offer.getDescription());
         offerToUpdate.setPrice(offer.getPrice());
+        offerToUpdate.setDeliveryTime(offer.getDeliveryTime());
+        offerToUpdate.setRevisions(offer.getRevisions());
+        offerToUpdate.setSubcategory(offer.getSubcategory());
         offerRepository.save(offerToUpdate);
     }
 

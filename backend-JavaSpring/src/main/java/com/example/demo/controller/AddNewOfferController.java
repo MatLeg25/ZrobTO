@@ -49,8 +49,7 @@ public class AddNewOfferController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void postOffer(@RequestBody Offer offer) {
 
-        Subcategory subcategory = subcategoryService.getSubcategoryById(offer.getSubcategoryID());
-        offer.setSubcategory(subcategory);
+        setOfferSubcategory(offer);
 
         Optional<FileEntity> fileEntity = fileService.getFile(offer.getFileID());
         if(fileEntity.isPresent()) {
@@ -60,6 +59,23 @@ public class AddNewOfferController {
 
         offerService.postOffer(offer);
         System.out.println("LOG| Offer with ID: "+ offer.getId()  + " updated successfully!");
+    }
+
+
+    //////////////////////////////////PUT
+    @PutMapping("/update-offer")
+    public void put(@RequestBody Offer offer) {
+
+        setOfferSubcategory(offer);
+
+//TODO update sibcategory (wydziel do metody posti put) and file
+        offerService.updateOffer(offer);
+    }
+
+
+    private void setOfferSubcategory(Offer offer) {
+        Subcategory subcategory = subcategoryService.getSubcategoryById(offer.getSubcategoryID());
+        offer.setSubcategory(subcategory);
     }
 
 

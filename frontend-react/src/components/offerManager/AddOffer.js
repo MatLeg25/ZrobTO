@@ -74,12 +74,12 @@ getSubcategories(categoryId = 1) {
       delivery_time: data.get("delivery-time"),
       revisions: data.get("revisions"),
       date: data.get("date"),
-      category: data.get("category"),
+      category: data.get("category-id"),
       fileID: "", //data.get("file"), ID set below with ID given from server
       subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
     }
 
-    //console.log(newOffer)
+    console.log(newOffer)
 
     this.setState({
       offers: [...this.state.offers, newOffer] //add new offer to state in the last position
@@ -172,6 +172,7 @@ getSubcategories(categoryId = 1) {
 
 displayForm() {
     return (
+      
       <form onSubmit={this.handleSubmit} >
 
         <div class="mb-3">
@@ -193,11 +194,11 @@ displayForm() {
         </div>
         <div class="mb-3">
           <label htmlFor="delivery-time" class="form-label">Delivery time</label>
-          <input type="number" min="0" id="delivery-time" name="delivery-time" class="form-control" placeholder="Enter delivery time"/>
+          <input type="number" min="0" id="delivery-time" name="delivery-time" class="form-control" placeholder="Enter delivery time (days)"/>
         </div>
         <div class="mb-3">
           <label htmlFor="revisions" class="form-label">Revisions</label>
-          <input type="number" min="0" id="revisions" name="revisions" class="form-control" placeholder="Enter delivery time (days)"/>
+          <input type="number" min="0" id="revisions" name="revisions" class="form-control" placeholder="Enter revisions number"/>
         </div>
         <div class="mb-3">
           <label htmlFor="price" class="form-label">Price</label>
