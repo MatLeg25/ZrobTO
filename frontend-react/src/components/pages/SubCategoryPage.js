@@ -1,5 +1,6 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
+import NavbarZT from "../navbar/NavbarZT";
 
 // export default function Child() {
 //     // We can use the `useParams` hook here to access
@@ -37,12 +38,19 @@ class SubCategoryPage extends React.Component {
   render() {
 
     return (
+
+      <>
+        <NavbarZT />
+        <br /><br />
+
       <div> 
-
-<b>Implementation in progress</b> <br />
-<b>Current location: {this.state.location}</b>
-
+        <center>
+        <b>Implementation in progress</b> <br />
+        <b>Current location: {this.state.location}</b>
+        </center>
       </div>
+
+      </>
     );
   }
 

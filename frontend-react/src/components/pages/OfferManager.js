@@ -4,6 +4,7 @@ import DisplayOffers from "../offerManager/DisplayOffers"
 import AddOffer from "../offerManager/AddOffer"
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import NavbarZT from "../navbar/NavbarZT";
 
 class OfferManager extends React.Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class OfferManager extends React.Component {
     return(<div>
 
     {/* <!-- Button trigger modal --> */}
-    <Button className="btn btn-dark" onClick={() => this.handleModal()}> New offer </Button>
+    <Button className="btn btn-dark" size="lg" onClick={() => this.handleModal()}> Add new offer </Button>
 
       <Modal show={this.state.show} onHide={() => this.handleModal()} >
       <Modal.Header className="btn btn-dark"> Modal Head Part</Modal.Header>
@@ -105,13 +106,26 @@ handleModal() {
 
   render() {
     return (
-      <div> 
-        <br /><hr /><br />
-        {this.displayModal()}
-        <br /><hr /><br />
-        <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-        <DisplayOffers data={this.state.offers} option={true} />
-        </Grid>
+
+      <div>
+        <NavbarZT />
+        <br /><br />
+      
+        <div> 
+          <br /><hr /><br />
+          <center> {this.displayModal()}</center>
+          <br /><hr /><br />
+
+          <Grid item xs={12}/>
+            <Grid container>
+                <Grid item xs={1} xm={2}/>
+                <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
+                      <DisplayOffers data={this.state.offers} option={true} /> 
+                </Grid>
+            </Grid>
+          
+        </div>
+      
       </div>
 
     );

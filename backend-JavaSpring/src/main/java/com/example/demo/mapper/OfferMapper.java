@@ -17,7 +17,7 @@ public class OfferMapper {
                 .title(offer.getTitle())
                 .description(offer.getDescription())
                 .price(offer.getPrice())
-                .deliveryTime(offer.getDeliveryTime())
+                .deliveryTime(offer.getDelivery_time())
                 .revisions(offer.getRevisions())
                 .fileUrl(this.getFileUrl(offer))
                 .category_Id(this.getCategoryId(offer))

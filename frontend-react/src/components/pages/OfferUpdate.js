@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import axios from "axios";
 import GetSubCategories from '../offerManager/GetSubCategories';
 import Button from '@material-ui/core/Button';
+import NavbarZT from "../navbar/NavbarZT";
 
 export default function OfferUpdate() {
   // We can use the `useParams` hook here to access the dynamic pieces of the URL.
@@ -59,6 +60,7 @@ export default function OfferUpdate() {
         fileID: "", //data.get("file"), ID set below with ID given from server
         subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
       }
+
   
         ///////////////////Post offer and image
     //   let formData = new FormData();
@@ -100,6 +102,8 @@ export default function OfferUpdate() {
         .catch((error) => {
           console.error('Error:', error);
         });
+
+        window.location.reload();
     }
 
 
@@ -123,6 +127,10 @@ export default function OfferUpdate() {
     }
   
     return (
+
+    <>
+      <NavbarZT />
+      <br /><br />  
 
 
       <form onSubmit={handleSubmit} >
@@ -176,6 +184,8 @@ export default function OfferUpdate() {
       <button type="submit" class="btn btn-primary">Update</button>
 
     </form>
+
+  </>
 
     );
   }
