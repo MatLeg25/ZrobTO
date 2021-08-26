@@ -32,9 +32,8 @@ public class DataBaseInitCfg {
             "Pozostałe");
 
     private final List<String> SUB_CATEGORIES_0 = Arrays.asList(
-            "Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki",
-            "Web i App Design","Web Design","App Design","Landing Page Design","UX Design",
-            "Design Banerów","Design ikon","Design druku","Ulotki","Broszury","Plakaty",
+            "Web i App Design","Web Design","App Design","UX Design",
+            "Design Banerów","Design ikon","Design druku","Ulotki","Plakaty",
             "Katalogi","Menu","Zaproszenia");
 
     private final List<String> SUB_CATEGORIES_1 = Arrays.asList(

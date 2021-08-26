@@ -79,7 +79,7 @@ class OfferManager extends React.Component {
     return(<div>
 
     {/* <!-- Button trigger modal --> */}
-    <Button className="btn btn-dark" onClick={() => this.handleModal()}> Manage offers! </Button>
+    <Button className="btn btn-dark" onClick={() => this.handleModal()}> New offer </Button>
 
       <Modal show={this.state.show} onHide={() => this.handleModal()} >
       <Modal.Header className="btn btn-dark"> Modal Head Part</Modal.Header>
@@ -91,7 +91,7 @@ class OfferManager extends React.Component {
       </Modal.Footer>
       </Modal>
 
-      <button type="button" className="btn btn-light"  onClick={this.getAllOffers}>Refresh</button>
+      {/* <button type="button" className="btn btn-light"  onClick={this.getAllOffers}>Refresh</button> */}
 
     </div>)
 }
