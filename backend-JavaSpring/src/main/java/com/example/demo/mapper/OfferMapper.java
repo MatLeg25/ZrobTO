@@ -20,6 +20,7 @@ public class OfferMapper {
                 .deliveryTime(offer.getDeliveryTime())
                 .revisions(offer.getRevisions())
                 .fileUrl(this.getFileUrl(offer))
+                .category_Id(this.getCategoryId(offer))
                 .subcategory_Id(this.getSubcategoryId(offer))
                 .subcategoryName(this.getSubcategoryName(offer))
                 .build();
@@ -33,6 +34,14 @@ public class OfferMapper {
         }
     }
 
+    private int getCategoryId(Offer offer) {
+        if (offer.getSubcategory().getCategory() == null) {
+            return -1;
+        } else {
+            return offer.getSubcategory().getCategory().getId();
+        }
+    }
+
     private int getSubcategoryId(Offer offer) {
         if (offer.getSubcategory() == null) {
             return -1;
@@ -40,7 +49,6 @@ public class OfferMapper {
             return offer.getSubcategory().getId();
         }
     }
-
 
     private String getSubcategoryName(Offer offer) {
         if (offer.getSubcategory() == null) {

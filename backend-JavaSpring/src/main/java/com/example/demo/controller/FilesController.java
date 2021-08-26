@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.example.demo.model.FileEntity;
@@ -83,4 +84,21 @@ public class FilesController {
                              .contentType(MediaType.valueOf(fileEntity.getContentType()))
                              .body(fileEntity.getData());
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteFile(@PathVariable String id) {
+        System.out.println("ID = "+id);
+        Optional<FileEntity> fileEntityOptional = fileService.getFile(id);
+
+        if (!fileEntityOptional.isPresent()) {
+            return ResponseEntity.notFound()
+                    .build();
+        }
+
+        fileService.deleteFile(id);
+        return ResponseEntity.ok()
+                .body(String.format("File with id %s has been removed", id));
+    }
+
+
 }

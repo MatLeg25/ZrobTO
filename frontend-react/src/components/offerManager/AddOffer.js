@@ -74,12 +74,12 @@ getSubcategories(categoryId = 1) {
       delivery_time: data.get("delivery-time"),
       revisions: data.get("revisions"),
       date: data.get("date"),
-      category: data.get("category"),
+      category: data.get("category-id"),
       fileID: "", //data.get("file"), ID set below with ID given from server
       subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
     }
 
-    //console.log(newOffer)
+    console.log(newOffer)
 
     this.setState({
       offers: [...this.state.offers, newOffer] //add new offer to state in the last position

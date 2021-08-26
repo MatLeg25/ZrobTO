@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
+import GetSubCategories from '../offerManager/GetSubCategories';
+import Button from '@material-ui/core/Button';
 
 export default function OfferUpdate() {
   // We can use the `useParams` hook here to access the dynamic pieces of the URL.
@@ -21,6 +23,7 @@ export default function OfferUpdate() {
                     deliveryTime: data.deliveryTime,
                     revisions: data.revisions,
                     fileUrl: data.fileUrl,
+                    category_id: data.category_Id,
                     subcategory_id: data.subcategory_Id,
                     subcategoryName: data.subcategoryName,
                 })
@@ -84,7 +87,7 @@ export default function OfferUpdate() {
     // }
   
     //function postOffer(offer) {
-      fetch('http://localhost:8080/offer', {
+      fetch('http://localhost:8080/update-offer', {
           method: 'PUT', 
           headers: {
             'Content-Type': 'application/json',
@@ -97,6 +100,26 @@ export default function OfferUpdate() {
         .catch((error) => {
           console.error('Error:', error);
         });
+    }
+
+
+    //////////////////////////////////////DETELTE
+    function deleteFile(props) {
+      //TODO get file ID from serwer (powinien byc do kazdej oferty przypisany)
+
+      fetch('http://localhost:8080/files/'+props, {
+        method: 'DELETE', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+        window.location.reload();
     }
   
     return (
@@ -140,11 +163,15 @@ export default function OfferUpdate() {
 
       <div class="mb-3">
         <img alt={'No image found'} src={offer.fileUrl} />
+        <Button size="small" variant="contained" color="secondary"  onClick={() =>  deleteFile(offer.fileID)}>
+                DELETE
+        </Button>
       </div>
-        <h5>SubcategoryID= {offer.subcategory_id}</h5>
-        <h5>Subcategory= {offer.subcategoryName}</h5>
+      <h5 style={{color: "grey"}}> CategoryID= {offer.category_id}</h5>
+        <h5 style={{color: "grey"}}>Current SubcategoryID= {offer.subcategory_id}</h5>
+        <h5 style={{color: "grey"}}>Current subcategory= {offer.subcategoryName}</h5>
 
-
+        <GetSubCategories categoryId={offer.category_id} subcategoryId={offer.subcategory_id} />
 
       <button type="submit" class="btn btn-primary">Update</button>
 
