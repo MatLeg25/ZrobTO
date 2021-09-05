@@ -37,6 +37,11 @@ public class OfferService {
         return null;
     }
 
+    public List<OfferDto> getOfferBySubcategoryId(Integer id) {
+        return offerRepository.findAllBySubcategoryId(id).stream()
+                .map(offerMapper::map).collect(Collectors.toList());
+    }
+
     public void postOffer(Offer offer) {
         offerRepository.save(offer);
     }
@@ -55,4 +60,5 @@ public class OfferService {
     public void deleteOffer(UUID id) {
         offerRepository.deleteById(id);
     }
+
 }

@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Box from '@material-ui/core/Box';
 import Container from 'react-bootstrap/Container'
-import {Link} from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 
 import Categories from './Categories';
 import logoImg from '../../resources/logo.png';

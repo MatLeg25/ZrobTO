@@ -44,7 +44,7 @@ export default function MediaCard(props) {
                 <Button size="small" color="primary">
                     Add to favourites
                 </Button>
-                <Button size="small" color="primary"  href={"offer/" + props.offer['id']}>
+                <Button size="small" color="primary"  href={"/offer/" + props.offer['id']}>
                     Show details
                 </Button>
             </CardActions>
