@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,7 +25,7 @@ public class Offer {
     private String title;
     private String description;
     private int price;
-    private int deliveryTime;
+    private int delivery_time;
     private int revisions;
 
     @Transient
@@ -44,11 +43,11 @@ public class Offer {
     @JsonIgnore
     private Subcategory subcategory;
 
-    public Offer(String title, String description, int price, int deliveryTime, int revisions, FileEntity fileEntity, Subcategory subcategory) {
+    public Offer(String title, String description, int price, int delivery_time, int revisions, FileEntity fileEntity, Subcategory subcategory) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.deliveryTime = deliveryTime;
+        this.delivery_time = delivery_time;
         this.revisions = revisions;
         this.fileEntity = fileEntity;
         this.subcategory = subcategory;

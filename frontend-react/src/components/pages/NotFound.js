@@ -1,6 +1,16 @@
 import React from 'react';
 
+import NavbarZT from "../navbar/NavbarZT";
+
 const NotFound = () => 
-                        <h1>404 - Component Not Found</h1>
+                    
+                    <>
+                        <NavbarZT />
+                        
+                        <br />
+                        <br />
+
+                        <center><h1>404 - Page Not Found</h1> </center>
+                    </>
 
 export default NotFound;

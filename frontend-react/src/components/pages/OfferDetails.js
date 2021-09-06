@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
+import NavbarZT from "../navbar/NavbarZT";
 
 export default function OfferDetails() {
   // We can use the `useParams` hook here to access the dynamic pieces of the URL.
@@ -30,20 +31,27 @@ export default function OfferDetails() {
     console.log(offer)
   
     return (
-      <div>
-        <h3>Offer ID =  {offerID}</h3>
-        <hr />
-        <h5>ID= {offer.id}</h5>
-        <h5>UserID= {offer.user_id}</h5>
-        <h5>Title= {offer.title}</h5>
-        <h5>Description= {offer.description}</h5>
-        <h5>Price= {offer.price}</h5>
-        <h5>Delivery time= {offer.deliveryTime}</h5>
-        <h5>Revisions= {offer.revisions}</h5>
-        <h5><img alt={'No image found'} src={offer.fileUrl} /></h5>
-        <h5>SubcategoryID= {offer.subcategory_id}</h5>
-        <h5>Subcategory= {offer.subcategoryName}</h5>
-      </div>
+      <>
+        <NavbarZT />
+        <br /><br />
+
+        <div>
+          <center>
+          <h3>Offer ID =  {offerID}</h3>
+          <hr />
+          <h5>ID= {offer.id}</h5>
+          <h5>UserID= {offer.user_id}</h5>
+          <h5>Title= {offer.title}</h5>
+          <h5>Description= {offer.description}</h5>
+          <h5>Price= {offer.price}</h5>
+          <h5>Delivery time= {offer.deliveryTime}</h5>
+          <h5>Revisions= {offer.revisions}</h5>
+          <h5><img alt={'No image found'} src={offer.fileUrl} /></h5>
+          <h5>SubcategoryID= {offer.subcategory_id}</h5>
+          <h5>Subcategory= {offer.subcategoryName}</h5>
+          </center>
+        </div>
+      </>
     );
   }
 

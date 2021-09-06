@@ -37,6 +37,11 @@ public class OfferService {
         return null;
     }
 
+    public List<OfferDto> getOfferBySubcategoryId(Integer id) {
+        return offerRepository.findAllBySubcategoryId(id).stream()
+                .map(offerMapper::map).collect(Collectors.toList());
+    }
+
     public void postOffer(Offer offer) {
         offerRepository.save(offer);
     }
@@ -46,7 +51,7 @@ public class OfferService {
         offerToUpdate.setTitle(offer.getTitle());
         offerToUpdate.setDescription(offer.getDescription());
         offerToUpdate.setPrice(offer.getPrice());
-        offerToUpdate.setDeliveryTime(offer.getDeliveryTime());
+        offerToUpdate.setDelivery_time(offer.getDelivery_time());
         offerToUpdate.setRevisions(offer.getRevisions());
         offerToUpdate.setSubcategory(offer.getSubcategory());
         offerRepository.save(offerToUpdate);
@@ -55,4 +60,5 @@ public class OfferService {
     public void deleteOffer(UUID id) {
         offerRepository.deleteById(id);
     }
+
 }

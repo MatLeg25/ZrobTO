@@ -32,30 +32,23 @@ public class DataBaseInitCfg {
             "Pozostałe");
 
     private final List<String> SUB_CATEGORIES_0 = Arrays.asList(
-            "Logo i marketing wizerunkowy","Projekt logo","Wizytówki","Design stylu marki",
-            "Web i App Design","Web Design","App Design","Landing Page Design","UX Design",
-            "Design Banerów","Design ikon","Design druku","Ulotki","Broszury","Plakaty",
+            "Web i App Design","Web Design","App Design","UX Design",
+            "Design Banerów","Design ikon","Design druku","Ulotki","Plakaty",
             "Katalogi","Menu","Zaproszenia");
 
     private final List<String> SUB_CATEGORIES_1 = Arrays.asList(
-            "SubCategory1a","SubCategory1b","SubCategory1c",
-            "SubCategory1d","SubCategory1e","SubCategory1f",
-            "SubCategory1g","SubCategory1h","SubCategory1i");
+            "Marketing w sieci","Strategie marketingowe","Email marketing",
+            "Video marketing","Crowdfunding","Inne");
 
     private final List<String> SUB_CATEGORIES_2 = Arrays.asList(
-            "SubCategory2a","SubCategory2b","SubCategory2c",
-            "SubCategory2d","SubCategory2e","SubCategory2f",
-            "SubCategory2g","SubCategory2h","SubCategory2i");
+            "Edycja wideo","Efekty wizualne","Napisy do filmów",
+            "Animacje GIF","Animacje 3D","Zapowiedzi filmów");
 
     private final List<String> SUB_CATEGORIES_3 = Arrays.asList(
-            "SubCategory3a","SubCategory3b","SubCategory3c",
-            "SubCategory3d","SubCategory3e","SubCategory3f",
-            "SubCategory3g","SubCategory3h","SubCategory3i");
+            "Python","Java","C#",
+            "C","C++","JavaScript");
 
-    private final List<String> SUB_CATEGORIES_4 = Arrays.asList(
-            "SubCategory4a","SubCategory4b","SubCategory4c",
-            "SubCategory4d","SubCategory4e","SubCategory4f",
-            "SubCategory4g","SubCategory4h","SubCategory4i");
+    private final List<String> SUB_CATEGORIES_4 = Arrays.asList();
 
     private final List<List<String>> SUB_CATEGORIES_LIST = Arrays.asList(SUB_CATEGORIES_0, SUB_CATEGORIES_1,SUB_CATEGORIES_2,SUB_CATEGORIES_3,SUB_CATEGORIES_4);
 

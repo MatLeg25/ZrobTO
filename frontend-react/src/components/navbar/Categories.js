@@ -9,7 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import {Link} from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
@@ -126,7 +126,7 @@ export default function FullWidthTabs() {
 
     {subcategories.map((subcategory) =>
       subcategoriesList.push(
-        <Link to={'category/'+categoryIndex+'/subCategory/'+subcategory.id} style={itemStyle}>{subcategory.name}</Link>
+        <Link to={'/category/'+categoryIndex+'/subCategory/'+subcategory.id} style={itemStyle}>{subcategory.name}</Link>
       )
     )}
 

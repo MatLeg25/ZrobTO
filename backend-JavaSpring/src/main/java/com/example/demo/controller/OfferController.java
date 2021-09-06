@@ -30,6 +30,12 @@ public class OfferController {
         return offerService.getOfferById(id);
     }
 
+    @GetMapping("/offer/subcategory/{id}")
+    public List<OfferDto> getBySubcategoryId(@PathVariable("id") Integer id) {
+        return offerService.getOfferBySubcategoryId(id);
+    }
+
+
 //    @PostMapping("/offer")
 //    @CrossOrigin(origins = "http://localhost:3000")
 //    public void post(@RequestBody Offer offer) {

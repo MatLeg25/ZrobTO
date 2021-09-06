@@ -5,19 +5,19 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Box from '@material-ui/core/Box';
 import Container from 'react-bootstrap/Container'
-import {Link} from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 
 import Categories from './Categories';
-import logoImg from '../../resources/logoV1.png';
+import logoImg from '../../resources/logo.png';
 
 class NavbarZT extends React.Component {
 
 
     displayNavbar() {
 
-        const logo = <Box bgcolor="#c7f7d4" color="red" p={2}>
+        const logo = <Box bgcolor="#def7ec" color="red" p={2}>
             <Link to={'/home'}>
-                <img src={logoImg} width="100" height="50"/>
+                <img src={logoImg} width="180" height="50"/>
             </Link>
         </Box>
 

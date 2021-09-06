@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import SubCategoryPage from './components/pages/SubCategoryPage';
 import NotFound from './components/pages/NotFound';
-import OfferManager from './components/pages/OfferManager'
+import OfferManager from './components/pages/OfferManager';
 
 const theme = createTheme({
     palette: {
@@ -23,10 +23,10 @@ const theme = createTheme({
     }
 })
 
+document.title = "ZróbTO";
 
 const App = () => (
   <Router>
-    
         <ThemeProvider theme={theme}>
           <Switch>
             <Route path='/home'><LandingPage /></Route> 
