@@ -214,7 +214,7 @@ displayForm() {
           <input type="file" id="file" name="file" class="form-control" placeholder="Upload image" />
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onClick={() => window.location.reload()}>Submit</button>
 
       </form>
  
