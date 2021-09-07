@@ -3,10 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 
-
 import NavbarZT from "../navbar/NavbarZT";
 import DisplayOffers from "../offerManager/DisplayOffers";
-import FilterPrice from "../FilterPrice"
+import FilterPrice from "../FilterPrice";
+import FilterCategory from "../FilterCategory";
 
 
 class Offers extends React.Component {
@@ -66,6 +66,7 @@ class Offers extends React.Component {
                                 <Grid item xs={1} xm={2}/>
                                 <Grid item xs={10} xm={8} container spacing={1}>
                                     <FilterPrice/>
+                                    <FilterCategory />
                                 </Grid>
                             </Grid>
                         </Grid>

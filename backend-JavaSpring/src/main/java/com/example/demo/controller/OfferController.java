@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.OfferDto;
-import com.example.demo.model.Offer;
 import com.example.demo.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +34,21 @@ public class OfferController {
         return offerService.getOfferBySubcategoryId(id);
     }
 
+    @GetMapping("/offer/price") //http://localhost:8080/offer/price?minPrice=120&maxPrice=141
+    public List<OfferDto> getByPriceRange(@RequestParam(name = "minPrice", defaultValue = "0", required = false) Integer minPrice,
+                                          @RequestParam(name = "maxPrice", defaultValue = "1000000", required = false ) Integer maxPrice) {
+        return offerService.getOfferByPriceRange(minPrice,maxPrice);
+    }
+
+    @GetMapping("/offer/sort/price/asc")
+    public List<OfferDto> getAllOrderByPriceAsc() {
+        return offerService.getAllOrderByPriceAsc();
+    }
+
+    @GetMapping("/offer/sort/price/desc")
+    public List<OfferDto> getAllOrderByPriceDesc() {
+        return offerService.getAllOrderByPriceDesc();
+    }
 
 //    @PostMapping("/offer")
 //    @CrossOrigin(origins = "http://localhost:3000")

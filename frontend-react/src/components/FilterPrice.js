@@ -42,8 +42,10 @@ export default function NativeSelects() {
                 minPrice: state.minPrice
             })
         }
-        console.log(state.minPrice)
-        console.log(state.maxPrice)
+
+        console.log("Target value= "+event.target.value)
+        console.log("minPrice= "+state.minPrice)
+        console.log("maxPrice= "+state.maxPrice)
 
 
         axios.get('http://localhost:8080/offer/price?minPrice='+ state.minPrice +'&maxPrice=' + state.maxPrice)
@@ -52,6 +54,8 @@ export default function NativeSelects() {
                     console.log(data)
                     // setState({offers: [data]});
                 });
+
+        console.log("===========")        
     };
 
     return (
@@ -71,7 +75,7 @@ export default function NativeSelects() {
                     <option aria-label="None" value="" />
                     <option value={0}>0</option>
                     <option value={100}>100</option>
-                    <option value={200}>200</option>
+                    <option value={150}>150</option>
                 </Select>
             </FormControl>
             <FormControl variant="outlined" className={classes.formControl}>
@@ -88,8 +92,8 @@ export default function NativeSelects() {
                 >
                     <option aria-label="None" value="" />
                     <option value={100}>100</option>
+                    <option value={150}>150</option>
                     <option value={200}>200</option>
-                    <option value={300}>300</option>
                 </Select>
             </FormControl>
             <h3>{state.minPrice}</h3>
