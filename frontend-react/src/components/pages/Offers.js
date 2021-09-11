@@ -7,6 +7,7 @@ import NavbarZT from "../navbar/NavbarZT";
 import DisplayOffers from "../offerManager/DisplayOffers";
 import FilterPrice from "../FilterPrice";
 import FilterCategory from "../FilterCategory";
+import Child from "../Child";
 
 
 class Offers extends React.Component {
@@ -14,7 +15,11 @@ class Offers extends React.Component {
         super();
         this.state = {
             offers: [],
+            isFilterActive : false,
+            filterQuerry : "price xD",
+            messageShown: false,
         }
+        this.handler = this.handler.bind(this);
         this.getAllOffers = this.getAllOffers.bind(this);
     }
 
@@ -31,6 +36,14 @@ class Offers extends React.Component {
             });
     }
 
+
+    // This method will be sent to the child component
+    handler(textxd) {
+        this.setState({
+            messageShown: textxd
+        });
+        console.log(textxd)
+    }
 
     display() {
         return (
@@ -65,8 +78,12 @@ class Offers extends React.Component {
                             <Grid container>
                                 <Grid item xs={1} xm={2}/>
                                 <Grid item xs={10} xm={8} container spacing={1}>
-                                    <FilterPrice/>
-                                    <FilterCategory />
+                                    <FilterPrice />
+                                    <Child action={this.handler} />
+                                    <br />
+                                    <b>===| {this.state.filterQuerry + this.state.messageShown} |===</b>
+                                    <br />
+                                   <FilterCategory action={this.handler} />
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -86,6 +103,13 @@ class Offers extends React.Component {
     render() {
         return this.display();
     }
-};
+}
+
+
+function mapStateToProps(state) {
+    return { isFilterActive : state.isFilterActive }
+  }
+
 
 export default Offers;
+

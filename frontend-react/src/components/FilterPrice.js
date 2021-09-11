@@ -52,11 +52,12 @@ export default function NativeSelects() {
                 .then(response => response.data)
                 .then(data => {
                     console.log(data)
-                    // setState({offers: [data]});
+                    //setState({offers: data});
                 });
 
         console.log("===========")        
     };
+
 
     return (
         <div>
@@ -98,8 +99,10 @@ export default function NativeSelects() {
             </FormControl>
             <h3>{state.minPrice}</h3>
             <h3>{state.maxPrice}</h3>
-            <h3>{state.offers}</h3>
+            
 
         </div>
     );
+
+    
 }
