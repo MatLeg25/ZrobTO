@@ -31,12 +31,18 @@ public class OfferController {
 
     @GetMapping("/offer/subcategory/{id}")
     public List<OfferDto> getBySubcategoryId(@PathVariable("id") Integer id) {
-        return offerService.getOfferBySubcategoryId(id);
+        return offerService.getOfferBySubcategoryId(id); //TODO: rethink ide of getOffer by categoryId - see filter in service
+    }
+
+    @GetMapping("/offer/category/{id}")
+    public List<OfferDto> getByCategoryId(@PathVariable("id") Integer id) {
+        return offerService.getOfferByCategoryId(id);
     }
 
     @GetMapping("/offer/price") //http://localhost:8080/offer/price?minPrice=120&maxPrice=141
     public List<OfferDto> getByPriceRange(@RequestParam(name = "minPrice", defaultValue = "0", required = false) Integer minPrice,
                                           @RequestParam(name = "maxPrice", defaultValue = "1000000", required = false ) Integer maxPrice) {
+        System.out.println("GET} minPrice="+minPrice+" ,maxPrice="+maxPrice);
         return offerService.getOfferByPriceRange(minPrice,maxPrice);
     }
 

@@ -75,4 +75,10 @@ public class OfferService {
         return this.offerRepository.findAllByOrderByPriceDesc().stream()
                 .map(offerMapper::map).collect(Collectors.toList());
     }
+
+    public List<OfferDto> getOfferByCategoryId(int id) {
+        return this.getAllOffers().stream()
+                .filter(offer -> offer.getCategory_Id() == id)
+                .collect(Collectors.toList());
+    }
 }

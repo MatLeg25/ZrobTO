@@ -7,7 +7,6 @@ import NavbarZT from "../navbar/NavbarZT";
 import DisplayOffers from "../offerManager/DisplayOffers";
 import FilterPrice from "../FilterPrice";
 import FilterCategory from "../FilterCategory";
-import Child from "../Child";
 
 
 class Offers extends React.Component {
@@ -16,10 +15,9 @@ class Offers extends React.Component {
         this.state = {
             offers: [],
             isFilterActive : false,
-            filterQuerry : "price xD",
-            messageShown: false,
+            filterQuerry : "price",
         }
-        this.handler = this.handler.bind(this);
+        this.setOffers = this.setOffers.bind(this);
         this.getAllOffers = this.getAllOffers.bind(this);
     }
 
@@ -36,13 +34,12 @@ class Offers extends React.Component {
             });
     }
 
-
     // This method will be sent to the child component
-    handler(textxd) {
+    setOffers(offers) {
         this.setState({
-            messageShown: textxd
+            offers: offers
         });
-        console.log(textxd)
+        console.log(offers)
     }
 
     display() {
@@ -78,12 +75,8 @@ class Offers extends React.Component {
                             <Grid container>
                                 <Grid item xs={1} xm={2}/>
                                 <Grid item xs={10} xm={8} container spacing={1}>
-                                    <FilterPrice />
-                                    <Child action={this.handler} />
-                                    <br />
-                                    <b>===| {this.state.filterQuerry + this.state.messageShown} |===</b>
-                                    <br />
-                                   <FilterCategory action={this.handler} />
+                                    <FilterPrice setOffers={this.setOffers} />
+                                    <FilterCategory setOffers={this.setOffers} />
                                 </Grid>
                             </Grid>
                         </Grid>

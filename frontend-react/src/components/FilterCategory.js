@@ -7,20 +7,33 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import axios from "axios";
 
+import { GetCategoriesNames, GetSubcategoriesNames } from './UTIL'
+
 class FilterCategory extends React.Component {
     constructor() {
         super();
         this.state = {
             defautl : "all",
+            categories : GetCategoriesNames(),
+            subcategories : GetSubcategoriesNames(),
         }
-        //this.handler = this.handler.bind(this);
 
     }
+
+    dispSubCat() {
+        console.log(this.state.subcategories)
+        return <p>{this.state.subcategories}</p>
+    } 
 
     handleChange = (event) => {
         const categoryName = event.target.value;
         console.log(event.target.name +"="+categoryName )
-        this.props.action(categoryName)
+
+        axios.get('http://localhost:8080/offer/price?minPrice='+ 120 +'&maxPrice=' + 150)
+        .then(response => response.data)
+        .then(data => {
+            this.props.setOffers(data) //SET PARENT STATE FROM CHILD
+        });
     }
 
     render() {
@@ -44,6 +57,14 @@ class FilterCategory extends React.Component {
                     <option value={12}>12</option>
                 </Select>
             </FormControl>
+aaa
+{this.state.categories}
+bb
+{this.state.subcategories}
+ccx
+<br />
+{this.dispSubCat()}
+fff
             </div>
         )
     }
