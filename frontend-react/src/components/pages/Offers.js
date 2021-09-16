@@ -44,8 +44,7 @@ class Offers extends React.Component {
                         <Grid container>
                             <Grid item xs={1} xm={2}/>
                             <Grid item xs={10} xm={8}>
-                                <h2>
-                                    All offers</h2>
+                                <h2>All offers</h2>
                             </Grid>
                         </Grid>
                         <Grid container>
