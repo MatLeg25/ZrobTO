@@ -74,7 +74,7 @@ class Offers extends React.Component {
                             </Grid>
                             <Grid container>
                                 <Grid item xs={1} xm={2}/>
-                                <Grid item xs={10} xm={8} container spacing={1}>
+                                <Grid item xs={10} xm={8} container spacing={2}>
                                     <FilterPrice setOffers={this.setOffers} />
                                     <FilterCategory setOffers={this.setOffers} />
                                 </Grid>

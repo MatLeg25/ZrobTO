@@ -20,16 +20,12 @@ class FilterCategory extends React.Component {
 
     }
 
-    dispSubCat() {
-        console.log(this.state.subcategories)
-        return <p>{this.state.subcategories}</p>
-    } 
 
     handleChange = (event) => {
-        const categoryName = event.target.value;
-        console.log(event.target.name +"="+categoryName )
+        const categoryID = event.target.value;
+        console.log(categoryID)
 
-        axios.get('http://localhost:8080/offer/price?minPrice='+ 120 +'&maxPrice=' + 150)
+        axios.get('http://localhost:8080/offer/category/'+categoryID)
         .then(response => response.data)
         .then(data => {
             this.props.setOffers(data) //SET PARENT STATE FROM CHILD
@@ -39,7 +35,7 @@ class FilterCategory extends React.Component {
     render() {
         return (
             <div>
-           <FormControl variant="outlined" className="emt">
+           <FormControl variant="outlined" className="emt" color="primary">
                 <InputLabel htmlFor="outlined-category-native-simple">Category</InputLabel>
                 <Select
                     native
@@ -48,23 +44,19 @@ class FilterCategory extends React.Component {
                     label="Category"
                     inputProps={{
                         name: 'category',
-                        id: 'outlined-min-price-native-simple',
+                        id: 'outlined-category-native-simple',
                     }}
                 >
                     <option aria-label="None" value="" />
-                    <option value={10}>10</option>
-                    <option value={11}>11</option>
-                    <option value={12}>12</option>
+                    <option value={1}>Grafika i design</option>
+                    <option value={2}>Digital marketing</option>
+                    <option value={3}>Foto i wideo</option>
+                    <option value={4}>Programowanie</option>
+                    <option value={5}>Pozostałe</option>
                 </Select>
             </FormControl>
-aaa
-{this.state.categories}
-bb
-{this.state.subcategories}
-ccx
-<br />
-{this.dispSubCat()}
-fff
+
+
             </div>
         )
     }
