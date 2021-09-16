@@ -1,16 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
 import NavbarZT from "../navbar/NavbarZT";
+import Grid from "@material-ui/core/Grid";
+import {Card, CardActionArea, CardMedia, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {Autorenew, Schedule} from "@mui/icons-material";
 
-export default function OfferDetails() {
-  // We can use the `useParams` hook here to access the dynamic pieces of the URL.
-  let { offerID } = useParams();
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 500,
+    },
+    media: {
+        height: 300,
+    },
+});
 
-  const [offer, setOffer] = useState({});
+export default function OfferDetails(props) {
 
-  useEffect(() => {
-        axios.get('http://localhost:8080/offer/'+offerID)
+    const classes = useStyles();
+
+
+    // We can use the `useParams` hook here to access the dynamic pieces of the URL.
+    let {offerID} = useParams();
+
+    const [offer, setOffer] = useState({});
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/offer/' + offerID)
             .then(response => response.data)
             .then(data => {
                 setOffer({
@@ -29,29 +46,63 @@ export default function OfferDetails() {
     }, []);
 
     console.log(offer)
-  
-    return (
-      <>
-        <NavbarZT />
-        <br /><br />
 
+    return (
         <div>
-          <center>
-          <h3>Offer ID =  {offerID}</h3>
-          <hr />
-          <h5>ID= {offer.id}</h5>
-          <h5>UserID= {offer.user_id}</h5>
-          <h5>Title= {offer.title}</h5>
-          <h5>Description= {offer.description}</h5>
-          <h5>Price= {offer.price}</h5>
-          <h5>Delivery time= {offer.deliveryTime}</h5>
-          <h5>Revisions= {offer.revisions}</h5>
-          <h5><img alt={'No image found'} src={offer.fileUrl} /></h5>
-          <h5>SubcategoryID= {offer.subcategory_id}</h5>
-          <h5>Subcategory= {offer.subcategoryName}</h5>
-          </center>
+            <div>
+                <NavbarZT/>
+            </div>
+            <div>
+                <Grid container spacing={10} direction="column">
+                    <Grid item xs={12}/>
+                    <Grid container>
+                        <Grid item xs={1} xm={2}/>
+                        <Grid item xs={10} xm={8}>
+                            <h2>{offer.title}</h2>
+                        </Grid>
+                    </Grid>
+                        <Grid item container spacing={3}>
+                            <Grid item xs={1} xm={2}/>
+                            <Grid item xs={5} xm={4}>
+                                <Card className={classes.root}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.media}
+                                            image={offer['fileUrl']}
+                                        />
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={5} xm={4}>
+                                <Grid container direction="column" spacing={1}>
+                                    <Grid item>
+                                <Typography>
+                                    <h5>Cena pakietu: {offer.price} zł</h5>
+                                </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography>
+                                            <h6>{offer.description}</h6>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography>
+                                            <Schedule/> Czas wykonania:
+                                            <h6>{offer.deliveryTime}</h6>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography>
+                                            <Autorenew/> Liczba poprawek:
+                                            <h6>{offer.revisions}</h6>
+                                        </Typography>
+                                    </Grid>
+                            </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+            </div>
         </div>
-      </>
     );
-  }
+}
 
