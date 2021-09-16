@@ -61,4 +61,24 @@ public class OfferService {
         offerRepository.deleteById(id);
     }
 
+    public List<OfferDto> getOfferByPriceRange(Integer minPrice, Integer maxPrice) {
+        return this.offerRepository.findAllByPriceBetween(minPrice, maxPrice).stream()
+                .map(offerMapper::map).collect(Collectors.toList());
+    }
+
+    public List<OfferDto> getAllOrderByPriceAsc() {
+        return this.offerRepository.findAllByOrderByPriceAsc().stream()
+                .map(offerMapper::map).collect(Collectors.toList());
+    }
+
+    public List<OfferDto> getAllOrderByPriceDesc() {
+        return this.offerRepository.findAllByOrderByPriceDesc().stream()
+                .map(offerMapper::map).collect(Collectors.toList());
+    }
+
+    public List<OfferDto> getOfferByCategoryId(int id) {
+        return this.getAllOffers().stream()
+                .filter(offer -> offer.getCategory_Id() == id)
+                .collect(Collectors.toList());
+    }
 }
