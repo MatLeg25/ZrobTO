@@ -40,8 +40,8 @@ class NavbarZT extends React.Component {
               <Nav>
               {categories}
                 <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
-                <Nav.Link href="#link">Zaloguj się</Nav.Link>
-                <Button variant="outline-success" >DOŁĄCZ</Button>
+                <Nav.Link href="http://localhost:3000/login">Zaloguj się</Nav.Link>
+                <Button variant="outline-success" href="http://localhost:3000/registration">DOŁĄCZ</Button>
                 </Nav>
             </Navbar.Collapse>
           </Navbar>
