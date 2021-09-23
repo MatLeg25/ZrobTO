@@ -9,10 +9,35 @@ import Link from 'react-router-dom/Link';
 
 import Categories from './Categories';
 import logoImg from '../../resources/logo.png';
+import AuthService from "../../security/services/auth-service";
 
 class NavbarZT extends React.Component {
+    constructor(props) {
+        super(props);
+        this.logOut = this.logOut.bind(this);
 
+        this.state = {
+            showModeratorBoard: false,
+            showAdminBoard: false,
+            currentUser: undefined,
+        };
+    }
 
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
+
+        if (user) {
+            this.setState({
+                currentUser: user,
+                showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+                showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+            });
+        }
+    }
+
+    logOut() {
+        AuthService.logout();
+    }
     displayNavbar() {
 
         const logo = <Box bgcolor="#def7ec" color="red" p={2}>
@@ -30,7 +55,10 @@ class NavbarZT extends React.Component {
                           </NavDropdown>
         )
 
-          return (
+        const {currentUser, showModeratorBoard, showAdminBoard} = this.state;
+
+
+        return (
             <Container >
         
             <Navbar bg="light" expand="lg" sticky="top">
@@ -40,9 +68,38 @@ class NavbarZT extends React.Component {
               <Nav>
               {categories}
                 <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
-                <Nav.Link href="http://localhost:3000/login">Zaloguj się</Nav.Link>
-                <Button variant="outline-success" href="http://localhost:3000/registration">DOŁĄCZ</Button>
-                </Nav>
+                {/*<Nav.Link href="http://localhost:3000/login">Zaloguj się</Nav.Link>*/}
+                {/*<Button variant="outline-success" href="http://localhost:3000/registration">DOŁĄCZ</Button>*/}
+                  {currentUser ? (
+                      <div className="navbar-nav ml-auto">
+                          <li className="nav-item">
+                              <Link to={"/profile"} className="nav-link">
+                                  <b> {currentUser.username} </b>
+                              </Link>
+                          </li>
+                          <li className="nav-item">
+                              <a href="/login" className="nav-link" onClick={this.logOut}>
+                                  Wyloguj
+                              </a>
+                          </li>
+                      </div>
+                  ) : (
+                      <div className="navbar-nav ml-auto">
+                          <li className="nav-item">
+                              <Link to={"/login"} className="nav-link">
+                                  Zaloguj
+                              </Link>
+                          </li>
+
+                          <li className="nav-item">
+                              {/*<Link to={"/register"} className="nav-link">*/}
+                                  <Button variant="outline-success" href="http://localhost:8081/register">DOŁĄCZ</Button>
+
+                              {/*</Link>*/}
+                          </li>
+                      </div>
+                  )}
+              </Nav>
             </Navbar.Collapse>
           </Navbar>
           

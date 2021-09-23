@@ -46,9 +46,9 @@ ul {
 }
 li {
   list-style-type: none;
-  padding: 10px;
-  margin: 10px;
-  background-color:rgba(61, 120, 175, 0.411);
+  /*padding: 10px;*/
+  /*margin: 10px;*/
+  /*background-color:rgba(61, 120, 175, 0.411);*/
   border-radius: 10px;
 }
 form {
