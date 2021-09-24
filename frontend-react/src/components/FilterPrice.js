@@ -48,17 +48,17 @@ class FilterPrice extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.onSubmit} >PRICE </Button>
-                <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-min-price-native-simple">Min Price</InputLabel>
+                <Button onClick={this.onSubmit}>Filtruj </Button>
+                <FormControl variant="standard">
+                    <InputLabel htmlFor="uncontrolled-native"></InputLabel>
                     <Select
                         native
                         value={this.state.minPrice}
                         onChange={this.handleChange}
-                        label="Minimal Price"
+                        label="Minimalna cena"
                         inputProps={{
                             name: 'minPrice',
-                            id: 'outlined-min-price-native-simple',
+                            id: 'uncontrolled-native',
                         }}
                     >
                         <option aria-label="None" value="" />
@@ -71,16 +71,16 @@ class FilterPrice extends React.Component {
                     </Select>
                     </FormControl>
 
-                    <FormControl variant="outlined" >
-                    <InputLabel htmlFor="outlined-max-price-native-simple">Max Price</InputLabel>
+                    <FormControl variant="standard" >
+                    <InputLabel htmlFor="outlined-max-price-native-simple"></InputLabel>
                     <Select
                         native
                         value={this.state.maxPrice}
                         onChange={this.handleChange}
-                        label="Max Price"
+                        label="Maksymalna cena"
                         inputProps={{
                             name: 'maxPrice',
-                            id: 'outlined-max-price-native-simple',
+                            id: 'uncontrolled-native',
                         }}
                     >
                         <option aria-label="None" value="" />

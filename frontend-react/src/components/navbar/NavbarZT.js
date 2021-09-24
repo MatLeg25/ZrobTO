@@ -59,8 +59,7 @@ class NavbarZT extends React.Component {
 
 
         return (
-            <Container >
-        
+
             <Navbar bg="light" expand="lg" sticky="top">
             {logo}
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -103,7 +102,6 @@ class NavbarZT extends React.Component {
             </Navbar.Collapse>
           </Navbar>
           
-          </Container>
             )
           }
 

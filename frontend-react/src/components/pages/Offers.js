@@ -71,11 +71,13 @@ class Offers extends React.Component {
                                 <Grid item xl={2}><Button variant="outlined" color="primary" size="small">Pokaż
                                     wszystkie</Button></Grid>
                             </Grid>
+                            <Grid item xs={12} style={{height : 50}}/>
+
                             <Grid container>
                                 <Grid item xs={1} xm={2}/>
-                                <Grid item xs={10} xm={8} container spacing={2}>
-                                    <FilterPrice setOffers={this.setOffers} />
-                                    <FilterCategory setOffers={this.setOffers} />
+                                <Grid item xs={10} xm={8} container spacing={2} style={{height : 50}}>
+                                    <Grid item> <FilterPrice setOffers={this.setOffers} /></Grid>
+                                    <Grid item><FilterCategory setOffers={this.setOffers} /></Grid>
                                 </Grid>
                             </Grid>
                         </Grid>

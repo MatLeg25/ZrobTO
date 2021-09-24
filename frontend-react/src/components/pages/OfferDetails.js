@@ -77,7 +77,7 @@ export default function OfferDetails(props) {
                                 <Grid container direction="column" spacing={1}>
                                     <Grid item>
                                 <Typography>
-                                    <h5>Cena pakietu: {offer.price} zł</h5>
+                                    <h4>Cena pakietu:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{offer.price} zł</h4>
                                 </Typography>
                                     </Grid>
                                     <Grid item>
@@ -87,14 +87,12 @@ export default function OfferDetails(props) {
                                     </Grid>
                                     <Grid item>
                                         <Typography>
-                                            <Schedule/> Czas wykonania:
-                                            <h6>{offer.deliveryTime}</h6>
+                                            <h5><Schedule/> Czas wykonania:&ensp;{offer.deliveryTime}dni</h5>
                                         </Typography>
                                     </Grid>
                                     <Grid item>
                                         <Typography>
-                                            <Autorenew/> Liczba poprawek:
-                                            <h6>{offer.revisions}</h6>
+                                            <h5><Autorenew/> Liczba poprawek:&ensp;{offer.revisions}</h5>
                                         </Typography>
                                     </Grid>
                             </Grid>

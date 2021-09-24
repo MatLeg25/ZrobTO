@@ -172,7 +172,6 @@ class App extends Component {
                 {/*    )}*/}
                 {/*</nav>*/}
 
-                <div className="container mt-3">
                     <Switch>
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/register" component={Register}/>
@@ -189,7 +188,6 @@ class App extends Component {
                         <Route path="/offers"><Offers/></Route>
                         <Route path="/*"><NotFound/></Route>
                     </Switch>
-                </div>
             </div>
         );
     }

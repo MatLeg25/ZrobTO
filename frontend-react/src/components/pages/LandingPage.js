@@ -54,7 +54,7 @@ class LandingPage extends React.Component {
                         <NavbarZT/>
                     </Grid>
 
-                    <Grid item container xs={12} direction="row">
+                    <Grid item container xs={12} direction="column">
                         <Grid item xs={12}>
                             <Paper style={styles.paperContainer}>
                                 <Grid item style={{height: '10em'}}> </Grid>

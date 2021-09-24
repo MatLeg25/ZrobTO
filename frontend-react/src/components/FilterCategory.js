@@ -35,10 +35,9 @@ class FilterCategory extends React.Component {
     render() {
         return (
             <div>
-           <FormControl variant="outlined" className="emt" color="primary">
-                <InputLabel htmlFor="outlined-category-native-simple">Category</InputLabel>
-                <Select
-                    native
+           <FormControl variant="standard" className="emt" color="primary">
+                <InputLabel htmlFor="uncontrolled-native">Category</InputLabel>
+                <NativeSelect
                     value={this.state.default}
                     onChange={this.handleChange}
                     label="Category"
@@ -53,7 +52,7 @@ class FilterCategory extends React.Component {
                     <option value={3}>Foto i wideo</option>
                     <option value={4}>Programowanie</option>
                     <option value={5}>Pozostałe</option>
-                </Select>
+                </NativeSelect>
             </FormControl>
 
 
