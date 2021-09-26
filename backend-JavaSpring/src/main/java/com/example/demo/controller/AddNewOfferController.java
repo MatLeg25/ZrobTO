@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8081")
 public class AddNewOfferController {
 
     private final FileService fileService;
@@ -46,7 +46,7 @@ public class AddNewOfferController {
     }
 
     @PostMapping("/add-offer2")
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public void postOffer(@RequestBody Offer offer) {
 
         setOfferSubcategory(offer);

@@ -121,6 +121,7 @@ getSubcategories(categoryId = 1) {
       })
       .then(data => {
         console.log('Success:', data);
+		window.location.reload();
       })
       .catch((error) => {
         console.error('Error:', error);
