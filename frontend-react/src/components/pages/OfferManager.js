@@ -5,6 +5,7 @@ import AddOffer from "../offerManager/AddOffer"
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import NavbarZT from "../navbar/NavbarZT";
+import AuthService from "../../security/services/auth-service"
 
 class OfferManager extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class OfferManager extends React.Component {
     this.state = {
       show:false,
       offers : [],
+      currentUser: AuthService.getCurrentUser()
       }
     //this.handleSubmit = this.handleSubmit.bind(this);
     this.getAllOffers = this.getAllOffers.bind(this);
@@ -20,6 +22,9 @@ class OfferManager extends React.Component {
 
   componentDidMount() {
     this.getAllOffers(); //load initial value from DB
+        
+    console.log("CURRENT USER:")
+    console.log(AuthService.getCurrentUser())
   }
 
 

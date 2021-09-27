@@ -8,6 +8,7 @@ import com.example.demo.service.OfferService;
 import com.example.demo.service.SubcategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
+@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 public class AddNewOfferController {
 
     private final FileService fileService;
