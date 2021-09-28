@@ -6,6 +6,8 @@ import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import NavbarZT from "../navbar/NavbarZT";
 import AuthService from "../../security/services/auth-service"
+import  { Redirect } from 'react-router-dom'
+import authHeader from '../../security/services/auth-header';
 
 class OfferManager extends React.Component {
   constructor(props) {
@@ -22,14 +24,14 @@ class OfferManager extends React.Component {
 
   componentDidMount() {
     this.getAllOffers(); //load initial value from DB
-        
     console.log("CURRENT USER:")
-    console.log(AuthService.getCurrentUser())
+    console.log(this.state.currentUser)
   }
 
 
   getAllOffers() {
-      axios.get('http://localhost:8080/offer')
+    //API_URL + 'user', { headers: authHeader() }
+      axios.get('http://localhost:8080/offer', { headers: authHeader() })
       .then(response => response.data)
       .then(data => {
          this.setState({ offers: data });
@@ -110,30 +112,40 @@ handleModal() {
 
 
   render() {
-    return (
 
-      <div>
-        <NavbarZT />
-        <br /><br />
-      
-        <div> 
-          <br /><hr /><br />
-          <center> {this.displayModal()}</center>
-          <br /><hr /><br />
+    if (!this.state.currentUser) {
+      alert("Nie masz uprawnień. Zaloguj się.");
+      return <Redirect to='/login'  />
+    } else {
 
-          <Grid item xs={12}/>
-            <Grid container>
-                <Grid item xs={1} xm={2}/>
-                <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
-                      <DisplayOffers data={this.state.offers} option={true} /> 
-                </Grid>
-            </Grid>
+        return (
+
+          <div>
+
+            <h2> Logged as: {this.state.currentUser.username}</h2>
+
+            <NavbarZT />
+            <br /><br />
           
-        </div>
-      
-      </div>
+            <div> 
+              <br /><hr /><br />
+              <center> {this.displayModal()}</center>
+              <br /><hr /><br />
 
-    );
+              <Grid item xs={12}/>
+                <Grid container>
+                    <Grid item xs={1} xm={2}/>
+                    <Grid item xs={10} xm={8} container spacing={4} justifyContent={"space-evenly"}>
+                          <DisplayOffers data={this.state.offers} option={true} /> 
+                    </Grid>
+                </Grid>
+              
+            </div>
+          
+          </div>
+
+        );
+    }
   }
 }
 

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.OfferDto;
 import com.example.demo.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class OfferController {
     }
 
     @GetMapping("/offer")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<OfferDto> get() {
         return offerService.getAllOffers();
     }
@@ -27,6 +29,11 @@ public class OfferController {
     @GetMapping("/offer/{id}")
     public OfferDto getById(@PathVariable("id") UUID id) {
         return offerService.getOfferById(id);
+    }
+
+    @GetMapping("/offer/user") //http://localhost:8080/offer/user?userId=1
+    public List<OfferDto> getById(@RequestParam(name = "userId", required = false) Long userId) {
+        return offerService.getOfferByUserId(userId);
     }
 
     @GetMapping("/offer/subcategory/{id}")

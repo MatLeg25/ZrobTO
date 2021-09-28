@@ -89,6 +89,7 @@ getSubcategories(categoryId = 1) {
     let formData = new FormData();
     formData.append("file", data.get("file"));
   
+    // axios.get(API_URL + 'user', { headers: authHeader() });
     fetch('http://localhost:8080/add-offer-file', {
         method: 'POST', 
     //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us

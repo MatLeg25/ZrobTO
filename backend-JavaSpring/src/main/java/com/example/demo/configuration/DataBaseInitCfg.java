@@ -105,7 +105,7 @@ public class DataBaseInitCfg {
         List<Subcategory> subcategories = this.subCategoryRepository.findAll();
         subcategories.forEach(
                 (subcategory -> {
-                    this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, fileEntity,subcategory));
+                    this.offerRepository.save(new Offer("Example offer", "Example description", random.nextInt(100)+100, random.nextInt(5)+1, random.nextInt(2)+1, fileEntity,subcategory, (long) random.nextInt(3)+1));
                 }));
     }
 

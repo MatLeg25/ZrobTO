@@ -10,7 +10,7 @@ import java.util.UUID;
 public class OfferDto {
 
     private UUID id;
-    private UUID user_id;
+    private Long user_id;
     private String title;
     private String description;
     private int price;

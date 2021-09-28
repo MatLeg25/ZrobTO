@@ -15,12 +15,13 @@ public interface OfferRepository extends JpaRepository<Offer, UUID> {
 
     List<Offer> findAllBySubcategoryId(Integer subcategoryID);
 
-    List <Offer> findAllByPriceBetween(int minPrice, int maxPrice); //return WITH edge values
+    List<Offer> findAllByPriceBetween(int minPrice, int maxPrice); //return WITH edge values
 
-    List <Offer> findAllByOrderByPriceAsc();
+    List<Offer> findAllByOrderByPriceAsc();
 
-    List <Offer> findAllByOrderByPriceDesc();
+    List<Offer> findAllByOrderByPriceDesc();
 
-
+    //TODO fix below method ?
+    //List<Offer> findAllByUserId(Long userId);
 
 }

@@ -81,4 +81,10 @@ public class OfferService {
                 .filter(offer -> offer.getCategory_Id() == id)
                 .collect(Collectors.toList());
     }
+
+    public List<OfferDto> getOfferByUserId(Long userId) {
+       return this.getAllOffers().stream()
+               .filter(offer -> offer.getUser_id() == userId)
+               .collect(Collectors.toList());
+    }
 }
