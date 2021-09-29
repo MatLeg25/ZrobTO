@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth-service";
+import Link from 'react-router-dom/Link';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -37,6 +38,15 @@ export default class Profile extends Component {
                 <ul>
                     {currentUser.roles &&
                     currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+                </ul>
+
+                <hr />
+                <strong>Actions: </strong>
+                <ul>
+                    <Link to={'/offermanager'}>Manage my offers</Link>
+                </ul>
+                <ul>
+                    <Link to={'/home'}>Go to home page</Link>
                 </ul>
             </div>
         );

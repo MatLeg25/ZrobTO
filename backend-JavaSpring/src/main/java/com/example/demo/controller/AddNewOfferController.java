@@ -30,7 +30,6 @@ public class AddNewOfferController {
     }
 
     @PostMapping("/add-offer-file")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<String> postFile(@RequestParam("file") MultipartFile file) {
         try {
             if (!file.isEmpty()) {
