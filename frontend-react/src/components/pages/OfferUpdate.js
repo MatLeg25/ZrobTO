@@ -4,6 +4,7 @@ import axios from "axios";
 import GetSubCategories from '../offerManager/GetSubCategories';
 import Button from '@material-ui/core/Button';
 import NavbarZT from "../navbar/NavbarZT";
+import AuthService from "../../security/services/auth-service";
 
 export default function OfferUpdate() {
   // We can use the `useParams` hook here to access the dynamic pieces of the URL.
@@ -61,7 +62,6 @@ export default function OfferUpdate() {
         subcategoryID: data.get("subcategory-id") //ID used on server side to set subcategory into offer
       }
 
-  
         ///////////////////Post offer and image
     //   let formData = new FormData();
     //   formData.append("file", data.get("file"));
@@ -92,7 +92,8 @@ export default function OfferUpdate() {
       fetch('http://localhost:8080/update-offer', {
           method: 'PUT', 
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer ' + AuthService.getCurrentUser().accessToken,
           },
           body: JSON.stringify(newOffer),
         })
@@ -141,7 +142,7 @@ export default function OfferUpdate() {
       </div>
       <div class="mb-3">
         <label htmlFor="user_id" class="form-label">User ID</label>
-        <input type="text" id="user_id" name="user_id" class="form-control" value='123456' readOnly class="form-control" id="disabledTextInput"/>
+        <input type="text" id="user_id" name="user_id" class="form-control" value={offer.user_id} readOnly class="form-control" id="disabledTextInput"/>
       </div>
       <div class="mb-3">
         <label htmlFor="date" class="form-label">Date</label>

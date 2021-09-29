@@ -67,6 +67,7 @@ public class AddNewOfferController {
 
     //////////////////////////////////PUT
     @PutMapping("/update-offer")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public void put(@RequestBody Offer offer) {
 
         setOfferSubcategory(offer);
