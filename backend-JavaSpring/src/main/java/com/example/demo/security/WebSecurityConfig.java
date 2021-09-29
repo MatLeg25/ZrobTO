@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import com.example.demo.security.jwt.AuthEntryPointJwt;
 import com.example.demo.security.jwt.AuthTokenFilter;
+import com.example.demo.security.model.ERole;
 import com.example.demo.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -62,7 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/**").permitAll()  //anyone can register and try to login
 			//TODO update front request to send token for POST (functionality for logged users)
-			//.antMatchers(GET, "/**").permitAll() //anyone can send a GET
+			.antMatchers(GET,"/add-offer-file","/add-offer2").hasAnyAuthority("ROLE_USER")
+			.antMatchers(POST, "/add-offer-file","/add-offer2").hasAnyAuthority("ROLE_ADMIN")
 			//.antMatchers( "/**").hasAnyAuthority("ROLE_USER")
 			//.antMatchers( "/**").hasAnyAuthority("ROLE_ADMIN")
 			.anyRequest().authenticated();

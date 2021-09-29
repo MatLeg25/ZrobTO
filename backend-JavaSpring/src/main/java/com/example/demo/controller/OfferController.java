@@ -21,7 +21,6 @@ public class OfferController {
     }
 
     @GetMapping("/offer")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<OfferDto> get() {
         return offerService.getAllOffers();
     }
@@ -32,7 +31,8 @@ public class OfferController {
     }
 
     @GetMapping("/offer/user") //http://localhost:8080/offer/user?userId=1
-    public List<OfferDto> getById(@RequestParam(name = "userId", required = false) Long userId) {
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public List<OfferDto> getByUserId(@RequestParam(name = "userId", required = false) Long userId) {
         return offerService.getOfferByUserId(userId);
     }
 

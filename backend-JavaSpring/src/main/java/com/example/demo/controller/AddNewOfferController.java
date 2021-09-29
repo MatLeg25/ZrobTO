@@ -30,6 +30,7 @@ public class AddNewOfferController {
     }
 
     @PostMapping("/add-offer-file")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<String> postFile(@RequestParam("file") MultipartFile file) {
         try {
             if (!file.isEmpty()) {
@@ -48,6 +49,7 @@ public class AddNewOfferController {
     }
 
     @PostMapping("/add-offer2")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 //    @CrossOrigin(origins = "http://localhost:3000")
     public void postOffer(@RequestBody Offer offer) {
 

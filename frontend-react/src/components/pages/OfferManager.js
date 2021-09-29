@@ -92,7 +92,7 @@ class OfferManager extends React.Component {
       <Modal show={this.state.show} onHide={() => this.handleModal()} >
       <Modal.Header className="btn btn-dark"> Modal Head Part</Modal.Header>
       <Modal.Body>
-                  <AddOffer />
+                  <AddOffer user={this.state.currentUser} />
       </Modal.Body>
       <Modal.Footer>
         <button type="button" className="btn btn-dark" onClick={() => this.handleModal()}>Close Modal</button>

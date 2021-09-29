@@ -1,14 +1,16 @@
 import React from 'react';
 import axios from "axios";
+import authHeader from '../../security/services/auth-header';
 
 class AddOffer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show:false,
       offers : [],
       subcategories : [],
       categories : [],
+      user : props.user,
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setCategory = this.setCategory.bind(this);
@@ -68,6 +70,7 @@ getSubcategories(categoryId = 1) {
     //build object (JSON) from data
     const newOffer = {
       //id: -1, //id is set by server
+      userID: this.state.user,
       title: data.get("title"),
       description: data.get("description"),
       price: data.get("price"),
@@ -90,7 +93,9 @@ getSubcategories(categoryId = 1) {
     formData.append("file", data.get("file"));
   
     // axios.get(API_URL + 'user', { headers: authHeader() });
+    //axios.get(API_URL + 'user', { headers: authHeader() });
     fetch('http://localhost:8080/add-offer-file', {
+        headers: authHeader(),
         method: 'POST', 
     //Here, in the REST call, we are not setting the Content-Type as multipart/form-data. The browser will do it for us
         body: formData,
@@ -116,7 +121,8 @@ getSubcategories(categoryId = 1) {
     fetch('http://localhost:8080/add-offer2', {
         method: 'POST', 
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', 
+          'Authorization': 'Bearer ' + this.state.user.accessToken,
         },
         body: JSON.stringify(offer),
       })
@@ -179,7 +185,7 @@ displayForm() {
 
         <div class="mb-3">
           <label htmlFor="user_id" class="form-label">User ID</label>
-          <input type="text" id="user_id" name="user_id" class="form-control" value='123456' readOnly class="form-control" id="disabledTextInput"/>
+          <input type="text" id="user_id" name="user_id" class="form-control" value={this.state.user.id} readOnly class="form-control" id="disabledTextInput"/>
         </div>
         <div class="mb-3">
           <label htmlFor="date" class="form-label">Date</label>
