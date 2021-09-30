@@ -18,20 +18,45 @@ class OfferManager extends React.Component {
       currentUser: AuthService.getCurrentUser()
       }
     //this.handleSubmit = this.handleSubmit.bind(this);
+    this.getUserOffers = this.getUserOffers.bind(this);
     this.getAllOffers = this.getAllOffers.bind(this);
+    this.getOffers = this.getOffers.bind(this);
   }
 
 
   componentDidMount() {
-    this.getAllOffers(); //load initial value from DB
-    console.log("CURRENT USER:")
-    console.log(this.state.currentUser)
+    this.getOffers();
+  }
+
+  getOffers() {
+    let user_roles = this.state.currentUser.roles;
+    console.log(user_roles)
+    let isAdmin = false;
+
+    user_roles.forEach(role => {
+      if(role=='ROLE_ADMIN') {
+        isAdmin= true;
+      }
+    });
+
+    isAdmin ? this.getAllOffers() : this.getUserOffers()
+
   }
 
 
+  getUserOffers() {
+    //API_URL + 'user', { headers: authHeader() }
+      axios.get('http://localhost:8080/offer/user?userId='+this.state.currentUser.id, { headers: authHeader() })
+      .then(response => response.data)
+      .then(data => {
+         this.setState({ offers: data });
+        console.log(data);
+    });
+  }
+
   getAllOffers() {
     //API_URL + 'user', { headers: authHeader() }
-      axios.get('http://localhost:8080/offer', { headers: authHeader() })
+      axios.get('http://localhost:8080/offer/admin', { headers: authHeader() })
       .then(response => response.data)
       .then(data => {
          this.setState({ offers: data });
@@ -87,15 +112,15 @@ class OfferManager extends React.Component {
     return(<div>
 
     {/* <!-- Button trigger modal --> */}
-    <Button className="btn btn-dark" size="lg" onClick={() => this.handleModal()}> Add new offer </Button>
+    <Button className="btn" size="lg" onClick={() => this.handleModal()}> Add new offer </Button>
 
       <Modal show={this.state.show} onHide={() => this.handleModal()} >
-      <Modal.Header className="btn btn-dark"> Modal Head Part</Modal.Header>
+      <Modal.Header className="btn btn-dark"> New offer</Modal.Header>
       <Modal.Body>
                   <AddOffer user={this.state.currentUser} />
       </Modal.Body>
       <Modal.Footer>
-        <button type="button" className="btn btn-dark" onClick={() => this.handleModal()}>Close Modal</button>
+        <button type="button" className="btn btn-dark" onClick={() => this.handleModal()}>Close</button>
       </Modal.Footer>
       </Modal>
 
@@ -107,7 +132,7 @@ class OfferManager extends React.Component {
 
 handleModal() {
   this.setState({show: !this.state.show});
-  this.getAllOffers(); // reload from DB after add new offer
+  this.getOffers(); // reload from DB after add new offer
 }
 
 
@@ -121,8 +146,6 @@ handleModal() {
         return (
 
           <div>
-
-            <h2> Logged as: {this.state.currentUser.username}</h2>
 
             <NavbarZT />
             <br /><br />
