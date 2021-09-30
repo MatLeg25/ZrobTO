@@ -23,6 +23,7 @@ class AddOffer extends React.Component {
     this.getAllOffers(); //load initial value from DB
     this.getSubcategories(); //load initial value from DB
     this.getAllCategories(); //load initial value from DB
+    console.log(this.state.user);
   }
 
   getAllOffers() {
@@ -70,7 +71,7 @@ getSubcategories(categoryId = 1) {
     //build object (JSON) from data
     const newOffer = {
       //id: -1, //id is set by server
-      userID: this.state.user,
+      user_id: this.state.user.id,
       title: data.get("title"),
       description: data.get("description"),
       price: data.get("price"),

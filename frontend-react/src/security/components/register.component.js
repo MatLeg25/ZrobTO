@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import Link from 'react-router-dom/Link';
 
 import AuthService from "../services/auth-service";
 
@@ -202,6 +203,9 @@ export default class Register extends Component {
                         />
                     </Form>
                 </div>
+                    <center>
+                        <Link to={'/home'}>Go to home page</Link>
+                    </center>
             </div>
         );
     }

@@ -87,7 +87,7 @@ export default function OfferDetails(props) {
                                     </Grid>
                                     <Grid item>
                                         <Typography>
-                                            <h5><Schedule/> Czas wykonania:&ensp;{offer.deliveryTime}dni</h5>
+                                            <h5><Schedule/> Czas wykonania:&ensp;{offer.deliveryTime}&ensp;dni</h5>
                                         </Typography>
                                     </Grid>
                                     <Grid item>
