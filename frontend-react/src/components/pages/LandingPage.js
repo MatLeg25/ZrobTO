@@ -62,10 +62,8 @@ class LandingPage extends React.Component {
                                 <Grid item container style={{height: '8em'}}>
                                     <Grid item xs={1} xm={4}/>
                                     <Grid item xs={8} xm={4}>
-                                        <Typography variant='h4' align='left'>ZróbTO z nami. Szukaj zlecaj i rozwijaj
-                                            się.</Typography>
-                                        <Typography variant='h4' align='left'>Najlepsi specjaliści dla Twojego
-                                            biznesu.</Typography>
+                                        <Typography variant='h4' align='left'>ZróbTo wit us. Search for services and grow.</Typography>
+                                        <Typography variant='h4' align='left'>Best specialists for your business.</Typography>
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={12}>
@@ -73,10 +71,10 @@ class LandingPage extends React.Component {
                                     <Grid item xs={10} xm={8}>
                                         <TextField style={styles.searchBox}>
                                             variant="standard"
-                                            label="Czego szukasz? Spróbuj “logo dla mojej firmy”"
+                                            label="What are you looking for? Try “logo for my business”"
                                         </TextField>
                                         <Button size="small" variant="contained" color="primary">
-                                            Szukaj
+                                            Search
                                         </Button>
                                     </Grid>
                                     <Grid item xs={1} xm={4}/>
@@ -89,7 +87,7 @@ class LandingPage extends React.Component {
 
                     <Grid item style={{height: '4em'}}>
 
-                        <Typography variant='h5' align='center'>Popularne usługi</Typography>
+                        <Typography variant='h5' align='center'>Popular services</Typography>
                     </Grid>
                     <Grid item xs={2}/>
                     <Grid item container xs={12}>
@@ -107,7 +105,7 @@ class LandingPage extends React.Component {
                                                 Logo design
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p">
-                                                Buduj markę
+                                                Build your brand
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
@@ -124,10 +122,10 @@ class LandingPage extends React.Component {
                                         />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                Portret
+                                                Portrait
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p">
-                                                Pokaż się
+                                                Show yourself
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
@@ -143,10 +141,10 @@ class LandingPage extends React.Component {
                                                 width: '185px'}}                                        />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                Sklep
+                                                Shop
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p">
-                                                Sprzedawaj w internecie
+                                                Sell online
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
@@ -164,7 +162,7 @@ class LandingPage extends React.Component {
                                                 Social Media
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p">
-                                                Dotrzyj do klientów
+                                                Reach clients
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
@@ -180,10 +178,10 @@ class LandingPage extends React.Component {
                                                 width: '185px'}}                                        />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                Montaż wideo
+                                                Video editing
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p">
-                                                Pokaż swoje zaangażowanie
+                                                Engage
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>

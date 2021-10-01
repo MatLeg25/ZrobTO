@@ -47,7 +47,7 @@ class NavbarZT extends React.Component {
         </Box>
 
         const categories = (
-                          <NavDropdown title="Kategorie"
+                          <NavDropdown title="Categories"
                           id="dropdown-menu-align-responsive-2"
                           drop = 'start'
                           >
@@ -66,7 +66,7 @@ class NavbarZT extends React.Component {
             <Navbar.Collapse className="justify-content-end">
               <Nav>
               {categories}
-                <Nav.Link href="#home">Zostań sprzedawcą</Nav.Link>
+                <Nav.Link href="#home">Become a seller</Nav.Link>
                 {/*<Nav.Link href="http://localhost:3000/login">Zaloguj się</Nav.Link>*/}
                 {/*<Button variant="outline-success" href="http://localhost:3000/registration">DOŁĄCZ</Button>*/}
                   {currentUser ? (
@@ -78,7 +78,7 @@ class NavbarZT extends React.Component {
                           </li>
                           <li className="nav-item">
                               <a href="/login" className="nav-link" onClick={this.logOut}>
-                                  Wyloguj
+                                  Sign Out
                               </a>
                           </li>
                       </div>
@@ -86,13 +86,13 @@ class NavbarZT extends React.Component {
                       <div className="navbar-nav ml-auto">
                           <li className="nav-item">
                               <Link to={"/login"} className="nav-link">
-                                  Zaloguj
+                                  Sign in
                               </Link>
                           </li>
 
                           <li className="nav-item">
                               {/*<Link to={"/register"} className="nav-link">*/}
-                                  <Button variant="outline-success" href="http://localhost:8081/register">DOŁĄCZ</Button>
+                                  <Button variant="outline-success" href="http://localhost:8081/register">JOIN</Button>
 
                               {/*</Link>*/}
                           </li>

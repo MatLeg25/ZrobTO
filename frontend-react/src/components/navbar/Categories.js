@@ -83,7 +83,12 @@ export default function FullWidthTabs() {
   };
 
   //TODO: rethink data format for category: [name<=>icon<=>subcats]
-  const categoriesName = ["Grafika i Design", "Digital Marketing", "Foto i wideo", "Programowanie", "Pozostałe"];
+  const categoriesName = [
+      "Design",
+      "Digital Marketing",
+      "Photo and Video",
+      "Programming",
+      "Other"];
   const categoriesIcon = [<EditIcon />,<AssessmentIcon />, <PhotoCameraIcon />,<DvrIcon />, <PagesIcon />];
 
 
